@@ -29,12 +29,12 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Test Mode Banner */}
-      <div className="bg-[#B59D7C] text-[#05051E] py-1 text-center text-[10px] font-serif font-bold uppercase tracking-[0.3em] fixed top-0 w-full z-[60]">
+      {/* Test Mode Banner - Now absolute so it stays at the top and disappears on scroll */}
+      <div className="bg-[#B59D7C] text-[#05051E] py-1 text-center text-[10px] font-serif font-bold uppercase tracking-[0.3em] absolute top-0 w-full z-[60]">
         MODO PRUEBA: Clonando Proyecto para Nueva Landing
       </div>
       
-      <nav className={`fixed w-full z-50 transition-all duration-500 border-b-[1.5px] border-white/80 ${isScrolled ? 'bg-[#05051E]/95 py-3' : 'bg-transparent py-7'} top-[20px]`}>
+      <nav className={`fixed w-full z-50 transition-all duration-500 border-b-[1.5px] border-white/80 ${isScrolled ? 'bg-[#05051E]/95 py-3 top-0' : 'bg-transparent py-7 top-6'}`}>
         <div className="max-w-[1600px] mx-auto px-10 md:px-32">
           <div className="flex items-center">
             {/* Logo */}
