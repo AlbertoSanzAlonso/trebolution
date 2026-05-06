@@ -16,22 +16,22 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { label: 'INICIO', path: '/' },
-    { label: 'TREBOLUTION EXPERIENCES', path: '#', hasChevron: true, dropdown: [
+    { label: 'Inicio', path: '/' },
+    { label: 'Trebolution Experiences', path: '#', hasChevron: true, dropdown: [
       { label: 'India Trebolution Experience', path: '/experience/india' },
       { label: 'Costa Rica Trebolution Experience', path: '/experience/costa-rica' }
     ]},
-    { label: 'CONÓCENOS', path: '#' },
-    { label: 'COMUNIDAD TREBOLERA', path: '#' },
-    { label: 'TREBOLUTION PRIVÉ', path: '#', isButton: true },
+    { label: 'Conócenos', path: '#' },
+    { label: 'Comunidad Trebolera', path: '#' },
+    { label: 'Trebolution Privé', path: '#', isButton: true },
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-[#05051E]/95 py-4' : 'bg-transparent py-8'}`}>
-      <div className="max-w-[1700px] mx-auto px-6 md:px-12">
-        <div className="flex justify-between items-center border-b border-white/20 pb-6">
-          {/* Logo */}
-          <Link to="/" className="w-[180px]">
+    <nav className={`fixed w-full z-50 transition-all duration-500 border-b-[1.5px] border-white/80 ${isScrolled ? 'bg-[#05051E]/95 py-3' : 'bg-transparent py-7'}`}>
+      <div className="max-w-[1600px] mx-auto px-10 md:px-32">
+        <div className="flex items-center">
+          {/* Logo - Pushed in with container margin */}
+          <Link to="/" className="w-[190px] shrink-0 mr-16">
             <img 
               src="https://trebolutiontravel.com/wp-content/uploads/2025/06/logo-trebolution-blanco@0.5x.png" 
               alt="Trebolution Travel Designer" 
@@ -39,38 +39,38 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden xl:flex items-center gap-10">
-            {navItems.map((item) => (
+          {/* Desktop Navigation Links - Moved to the left (closer to logo) */}
+          <div className="hidden xl:flex items-center gap-1 flex-grow justify-start h-[40px]">
+            {navItems.map((item, index) => (
               item.isButton ? (
                 <Link 
                   key={item.label}
                   to={item.path}
-                  className="px-6 py-2 border border-white/40 rounded-full text-[11px] font-sans font-medium tracking-[0.15em] text-white hover:bg-white hover:text-[#05051E] transition-all"
+                  className="ml-6 px-8 py-3 border-[1.5px] border-white rounded-full text-[15px] font-serif font-bold uppercase tracking-[0.1em] text-white hover:bg-white hover:text-[#05051E] transition-all whitespace-nowrap"
                 >
                   {item.label}
                 </Link>
               ) : (
-                <div key={item.label} className="group relative">
+                <div key={item.label} className="group relative flex items-center h-full">
                   <Link 
                     to={item.path} 
-                    className={`text-[11px] font-sans font-medium tracking-[0.15em] transition-colors flex items-center gap-1 hover:text-[#B59D7C] pb-2 -mb-[26px] relative z-10 ${
-                      (item.label === 'TREBOLUTION EXPERIENCES' || location.pathname.includes('/experience/')) 
-                      ? 'text-white after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-white' 
+                    className={`px-4 text-[15px] font-serif font-bold uppercase tracking-[0.12em] transition-colors flex items-center gap-1 hover:text-[#B59D7C] whitespace-nowrap relative py-2 ${
+                      index === 1 
+                      ? 'text-white after:content-[""] after:absolute after:bottom-0 after:left-4 after:right-4 after:h-[2.5px] after:bg-white' 
                       : 'text-white'
                     }`}
                   >
                     {item.label}
-                    {item.hasChevron && <ChevronDown size={12} className="opacity-80" />}
+                    {item.hasChevron && <ChevronDown size={14} className="opacity-90 mt-0.5" />}
                   </Link>
                   
                   {item.dropdown && (
-                    <div className="absolute top-full left-0 w-[300px] bg-[#05051E] mt-8 p-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-2xl border border-white/10">
+                    <div className="absolute top-full left-0 w-[380px] bg-[#FFFCF4] mt-0 p-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-2xl border border-white/20">
                       {item.dropdown.map((sub) => (
                         <Link 
                           key={sub.label}
                           to={sub.path}
-                          className="block py-3 text-[10px] uppercase tracking-widest text-white hover:text-[#B59D7C] transition-colors border-b border-white/5 last:border-0"
+                          className="block py-4 text-[15px] font-serif font-bold tracking-widest text-[#B59D7C] hover:text-[#05051E] transition-colors border-b border-[#B59D7C]/10 last:border-0 whitespace-nowrap"
                         >
                           {sub.label}
                         </Link>
@@ -82,18 +82,18 @@ const Navbar = () => {
             ))}
             
             {/* Language Selector */}
-            <div className="flex items-center gap-3 ml-4">
-              <img src="https://flagcdn.com/w20/gb.png" alt="EN" className="w-4 h-3 cursor-pointer opacity-70 hover:opacity-100" />
-              <img src="https://flagcdn.com/w20/es.png" alt="ES" className="w-4 h-3 cursor-pointer opacity-100" />
+            <div className="flex items-center gap-4 ml-8">
+              <img src="https://flagcdn.com/w20/gb.png" alt="EN" className="w-5 h-4 cursor-pointer opacity-70 hover:opacity-100" />
+              <img src="https://flagcdn.com/w20/es.png" alt="ES" className="w-5 h-4 cursor-pointer opacity-100" />
             </div>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="xl:hidden text-white"
+            className="xl:hidden ml-auto text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
           </button>
         </div>
       </div>
@@ -108,7 +108,7 @@ const Navbar = () => {
             <Link 
               key={item.label}
               to={item.path}
-              className={`text-[13px] uppercase tracking-widest font-medium ${item.isButton ? 'text-white border border-white/40 text-center py-4 rounded-full' : 'text-white'}`}
+              className={`text-[18px] uppercase tracking-[0.2em] font-serif font-bold ${item.isButton ? 'text-white border border-white/40 text-center py-4 rounded-full' : 'text-white'}`}
               onClick={() => setIsMenuOpen(false)}
             >
               {item.label}

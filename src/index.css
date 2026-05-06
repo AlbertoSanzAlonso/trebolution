@@ -9,16 +9,20 @@
 
   --font-serif: "Antic Didone", serif;
   --font-sans: "Poppins", sans-serif;
+  --font-weight-light: 200;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
 }
 
 @layer base {
   body {
-    @apply bg-white text-brand-primary font-sans;
+    @apply bg-white text-[#05051E] font-sans font-light;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-serif font-normal;
+    letter-spacing: -0.02em;
   }
 }
 
