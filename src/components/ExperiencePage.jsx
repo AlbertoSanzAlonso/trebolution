@@ -17,7 +17,7 @@ const ExperiencePage = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative h-[100vh] w-full overflow-hidden flex items-center px-6 md:px-24">
+      <section className="relative h-screen w-full overflow-hidden flex items-center px-6 md:px-24">
         {experience.videoHero ? (
           <video 
             autoPlay 
