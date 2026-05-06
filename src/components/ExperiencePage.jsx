@@ -17,38 +17,56 @@ const ExperiencePage = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative h-[85vh] w-full overflow-hidden">
-        <img 
-          src={experience.heroImage} 
-          alt={experience.title} 
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/30" />
+      <section className="relative h-[100vh] w-full overflow-hidden flex items-center justify-center">
+        {experience.videoHero ? (
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline 
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src={experience.videoHero} type="video/mp4" />
+          </video>
+        ) : (
+          <img 
+            src={experience.heroImage} 
+            alt={experience.title} 
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
+        <div className="absolute inset-0 bg-[#05051E]/20" />
         
-        <div className="absolute inset-0 flex items-center px-6 md:px-24">
-          <div className="max-w-4xl">
-            <h2 className="experience-subtitle">{experience.subtitle}</h2>
-            <h1 className="experience-title">{experience.title}</h1>
-            <p className="experience-date">{experience.date}</p>
+        <div className="relative z-10 w-full max-w-[1440px] px-6 md:px-24 flex flex-col items-start gap-8">
+          <h1 className="text-white font-serif text-[4rem] md:text-[5.5rem] leading-[1] uppercase tracking-tight">
+            {experience.titleDisplay[0]} <br />
+            <span className="font-light italic lowercase">{experience.titleDisplay[1]}</span>
+          </h1>
+          
+          <div className="flex flex-col gap-1">
+            <p className="text-white text-xl md:text-2xl font-light">{experience.subtitle}</p>
+            <p className="text-white text-xl md:text-2xl font-light">{experience.date}</p>
           </div>
         </div>
       </section>
 
       {/* Content Section */}
-      <section className="py-24 px-6 md:px-24">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start">
-          <div>
-            <span className="content-section-subtitle">{experience.sectionSubtitle}</span>
-            <h2 className="content-section-title">{experience.sectionTitle}</h2>
+      <section className="py-32 px-6 md:px-24 bg-white">
+        <div className="max-w-[1440px] mx-auto grid lg:grid-cols-2 gap-20 items-start">
+          <div className="flex flex-col gap-2">
+            <h4 className="text-[14px] font-sans font-bold tracking-[0.3em] uppercase text-[#B59D7C]">
+              {experience.sectionSubtitle}
+            </h4>
+            <h2 className="text-[3.5rem] md:text-[4.5rem] font-serif text-[#05051E] leading-[1.1] uppercase">
+              {experience.sectionTitle}
+            </h2>
           </div>
           
-          <div className="flex flex-col gap-6">
-            <h3 className="text-[#0A192F] font-bold text-lg leading-snug font-sans">
-              {experience.id === 'india' 
-                ? 'Un viaje exclusivo entre aromas, colores y espiritualidad.' 
-                : 'Costa Rica Trebolution Experience ha sido seleccionada personalmente.'}
-            </h3>
-            <p className="content-paragraph">
+          <div className="flex flex-col gap-8 lg:pt-12">
+            <p className="text-[18px] font-sans font-bold text-[#05051E] leading-relaxed">
+              Un viaje exclusivo entre aromas, colores y espiritualidad.
+            </p>
+            <p className="text-[16px] font-sans text-[#05051E]/80 leading-[1.8] font-light">
               {experience.description}
             </p>
           </div>
@@ -60,14 +78,15 @@ const ExperiencePage = () => {
         href="https://wa.me/34666051114" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="whatsapp-btn"
+        className="whatsapp-btn !bottom-8"
+        aria-label="WhatsApp"
       >
-        <MessageCircle size={32} />
+        <MessageCircle size={32} className="fill-white text-[#25D366]" />
       </a>
 
-      <Link to={experience.nextPath} className="floating-nav-btn group">
-        <span className="text-[9px] opacity-60 tracking-widest uppercase mb-1">Ver siguiente</span>
-        <span className="text-sm font-medium tracking-wide group-hover:underline underline-offset-4">{experience.ctaLabel}</span>
+      <Link to={experience.nextPath} className="fixed bottom-8 right-24 bg-[#05051E] text-white px-10 py-5 flex flex-col items-start gap-1 shadow-2xl transition-all hover:bg-[#B59D7C] z-40">
+        <span className="text-[10px] opacity-60 tracking-[0.2em] uppercase">VER SIGUIENTE</span>
+        <span className="text-[14px] font-medium tracking-wide uppercase">{experience.ctaLabel}</span>
       </Link>
     </div>
   );

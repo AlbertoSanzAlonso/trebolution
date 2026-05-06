@@ -15,61 +15,103 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navItems = [
+    { label: 'Inicio', path: '/' },
+    { label: 'Trebolution Experiences', path: '#', hasChevron: true, dropdown: [
+      { label: 'India Trebolution Experience', path: '/experience/india' },
+      { label: 'Costa Rica Trebolution Experience', path: '/experience/costa-rica' }
+    ]},
+    { label: 'Conócenos', path: '/sobre-trebolution' },
+    { label: 'Comunidad Trebolera', path: '/comunidad-trebolera' },
+    { label: 'Trebolution Privé', path: '/trebolution-prive', isButton: true },
+  ];
+
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-8'}`}>
-      <div className="max-w-[1800px] mx-auto px-6 md:px-12 flex justify-between items-center">
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[#05051E]/95 py-4 border-b border-[#B59D7C]' : 'bg-transparent py-6 border-b border-white/10'}`}>
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex flex-col items-center leading-none group">
-          <span className={`text-2xl md:text-3xl font-serif font-bold tracking-tight ${isScrolled ? 'text-[#0A192F]' : 'text-white'}`}>
-            Trebolution
-          </span>
-          <span className={`text-[7px] md:text-[9px] font-medium tracking-[0.3em] uppercase mt-1 ${isScrolled ? 'text-brand-accent' : 'text-white/80'}`}>
-            Travel Designer
-          </span>
+        <Link to="/" className="w-[180px]">
+          <img 
+            src="https://trebolutiontravel.com/wp-content/uploads/2025/06/logo-trebolution-blanco@0.5x.png" 
+            alt="Trebolution Travel Designer" 
+            className="w-full h-auto"
+          />
         </Link>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden xl:flex items-center gap-12">
-          <Link to="/" className={`nav-link ${isScrolled ? 'text-[#0A192F]' : 'text-white'}`}>Inicio</Link>
-          <div className="flex items-center gap-1 group cursor-pointer border-b border-transparent hover:border-brand-accent transition-all pb-1">
-            <span className={`nav-link ${isScrolled ? 'text-[#0A192F]' : 'text-white'}`}>Trebolution Experiences</span>
-            <ChevronDown size={14} className={isScrolled ? 'text-[#0A192F]' : 'text-white'} />
-          </div>
-          <Link to="/conocenos" className={`nav-link ${isScrolled ? 'text-[#0A192F]' : 'text-white'}`}>Conócenos</Link>
-          <Link to="/comunidad" className={`nav-link ${isScrolled ? 'text-[#0A192F]' : 'text-white'}`}>Comunidad Trebolera</Link>
-        </div>
-
-        {/* Right Section */}
-        <div className="flex items-center gap-4 md:gap-8">
-          <button className={`nav-button hidden md:block ${isScrolled ? 'border-[#0A192F] text-[#0A192F] hover:bg-[#0A192F] hover:text-white' : 'border-white text-white hover:bg-white hover:text-[#0A192F]'}`}>
-            Trebolution Privé
-          </button>
+        <div className="hidden xl:flex items-center gap-2">
+          {navItems.map((item) => (
+            item.isButton ? (
+              <Link 
+                key={item.label}
+                to={item.path}
+                className="ml-4 px-6 py-2.5 border border-[#B59D7C] rounded-full text-[13px] font-sans font-medium uppercase tracking-[0.1em] text-[#B59D7C] hover:bg-[#B59D7C] hover:text-white transition-all"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <div key={item.label} className="group relative">
+                <Link 
+                  to={item.path} 
+                  className={`px-4 py-2 text-[13px] font-sans font-medium uppercase tracking-[0.1em] transition-colors flex items-center gap-1 group-hover:text-[#B59D7C] ${
+                    (item.label === 'Trebolution Experiences' && location.pathname.includes('/experience/')) 
+                    ? 'text-[#B59D7C] border-b-2 border-[#B59D7C]' 
+                    : 'text-white'
+                  }`}
+                >
+                  {item.label}
+                  {item.hasChevron && <ChevronDown size={14} />}
+                </Link>
+                
+                {item.dropdown && (
+                  <div className="absolute top-full left-0 w-[280px] bg-[#05051E] mt-4 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-xl">
+                    {item.dropdown.map((sub) => (
+                      <Link 
+                        key={sub.label}
+                        to={sub.path}
+                        className="block py-3 text-[12px] uppercase tracking-wider text-white hover:text-[#B59D7C] transition-colors border-b border-white/5 last:border-0"
+                      >
+                        {sub.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          ))}
           
-          <div className="flex items-center gap-3">
-            <img src="https://flagcdn.com/w20/gb.png" alt="English" className="w-5 h-3.5 object-cover rounded-sm cursor-pointer opacity-70 hover:opacity-100 transition-opacity" />
-            <img src="https://flagcdn.com/w20/es.png" alt="Español" className="w-5 h-3.5 object-cover rounded-sm cursor-pointer opacity-100" />
+          {/* Language Selector */}
+          <div className="flex items-center gap-3 ml-6">
+            <img src="https://flagcdn.com/w20/gb.png" alt="EN" className="w-4 h-3 cursor-pointer opacity-70 hover:opacity-100" />
+            <img src="https://flagcdn.com/w20/es.png" alt="ES" className="w-4 h-3 cursor-pointer opacity-100" />
           </div>
-
-          {/* Mobile Menu Toggle */}
-          <button 
-            className={`xl:hidden ${isScrolled ? 'text-[#0A192F]' : 'text-white'}`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
         </div>
+
+        {/* Mobile Menu Toggle */}
+        <button 
+          className="xl:hidden text-white"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
+        </button>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="xl:hidden absolute top-full left-0 w-full bg-white shadow-2xl py-8 px-6 flex flex-col gap-6 animate-fade-in text-brand-primary">
-          <Link to="/" className="nav-link text-lg text-[#0A192F]" onClick={() => setIsMenuOpen(false)}>Inicio</Link>
-          <div className="nav-link text-lg text-[#0A192F]">Trebolution Experiences</div>
-          <Link to="/conocenos" className="nav-link text-lg text-[#0A192F]" onClick={() => setIsMenuOpen(false)}>Conócenos</Link>
-          <Link to="/comunidad" className="nav-link text-lg text-[#0A192F]" onClick={() => setIsMenuOpen(false)}>Comunidad Trebolera</Link>
-          <button className="nav-button border-[#0A192F] text-[#0A192F] w-full py-4 text-sm mt-4">
-            Trebolution Privé
+        <div className="xl:hidden fixed inset-0 top-0 bg-[#05051E] z-[60] p-8 flex flex-col gap-6 pt-24 animate-fade-in">
+          <button onClick={() => setIsMenuOpen(false)} className="absolute top-8 right-8 text-white">
+            <X size={32} />
           </button>
+          {navItems.map((item) => (
+            <Link 
+              key={item.label}
+              to={item.path}
+              className={`text-lg uppercase tracking-widest font-medium ${item.isButton ? 'text-[#B59D7C] border border-[#B59D7C] text-center py-4 rounded-full' : 'text-white'}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
       )}
     </nav>
