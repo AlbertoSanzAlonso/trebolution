@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import ExperiencePage from './components/ExperiencePage';
+import CostaRicaPage from './components/CostaRicaPage';
 
 function App() {
   useEffect(() => {
@@ -23,6 +24,7 @@ function App() {
     <Router>
       <div className="min-h-screen selection:bg-brand-accent selection:text-white">
         <Routes>
+          <Route path="/experience/costa-rica" element={<CostaRicaPage />} />
           <Route path="/experience/:id" element={<ExperiencePage />} />
           <Route path="/" element={<Navigate to="/experience/india" replace />} />
           {/* Fallback for any other route */}

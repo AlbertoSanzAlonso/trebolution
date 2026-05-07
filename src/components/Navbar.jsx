@@ -35,10 +35,10 @@ const Navbar = () => {
       </div>
       
       <nav className={`fixed w-full z-50 transition-all duration-500 border-b-[1.5px] border-white/80 ${isScrolled ? 'bg-[#05051E]/95 py-3 top-0' : 'bg-transparent py-7 top-6'}`}>
-        <div className="max-w-[1600px] mx-auto px-10 md:px-32">
+        <div className="max-w-[1600px] mx-auto px-10 md:px-12 2xl:px-32">
           <div className="flex items-center">
             {/* Logo */}
-            <Link to="/" className="w-[190px] shrink-0 mr-16">
+            <Link to="/" className="w-[170px] xl:w-[190px] shrink-0 mr-8 xl:mr-10 2xl:mr-16">
               <img 
                 src="https://trebolutiontravel.com/wp-content/uploads/2025/06/logo-trebolution-blanco@0.5x.png" 
                 alt="Trebolution Travel Designer" 
@@ -47,13 +47,13 @@ const Navbar = () => {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <div className="hidden xl:flex items-center gap-1 flex-grow justify-start h-[40px]">
+            <div className="hidden xl:flex items-center gap-0.5 2xl:gap-1 flex-grow justify-start h-[40px]">
               {navItems.map((item, index) => (
                 item.isButton ? (
                   <Link 
                     key={item.label}
                     to={item.path}
-                    className="ml-6 px-8 py-3 border-[1.5px] border-white rounded-full text-[15px] font-serif font-bold uppercase tracking-[0.1em] text-white hover:bg-white hover:text-[#05051E] transition-all whitespace-nowrap"
+                    className="ml-4 2xl:ml-6 px-6 2xl:px-8 py-3 border-[1.5px] border-white rounded-full text-[13px] 2xl:text-[15px] font-serif font-bold uppercase tracking-[0.1em] text-white hover:bg-white hover:text-[#05051E] transition-all whitespace-nowrap"
                   >
                     {item.label}
                   </Link>
@@ -61,9 +61,9 @@ const Navbar = () => {
                   <div key={item.label} className="group relative flex items-center h-full">
                     <Link 
                       to={item.path} 
-                      className={`px-4 text-[15px] font-serif font-bold uppercase tracking-[0.12em] transition-colors flex items-center gap-1 hover:text-[#B59D7C] whitespace-nowrap relative py-2 ${
+                      className={`px-2 2xl:px-4 text-[13px] 2xl:text-[15px] font-serif font-bold uppercase tracking-[0.12em] transition-colors flex items-center gap-1 hover:text-[#B59D7C] whitespace-nowrap relative py-2 ${
                         index === 1 
-                        ? 'text-white after:content-[""] after:absolute after:bottom-0 after:left-4 after:right-4 after:h-[2.5px] after:bg-white' 
+                        ? 'text-white after:content-[""] after:absolute after:bottom-0 after:left-2 2xl:after:left-4 after:right-2 2xl:after:right-4 after:h-[2.5px] after:bg-white' 
                         : 'text-white'
                       }`}
                     >
