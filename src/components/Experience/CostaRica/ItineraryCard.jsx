@@ -10,6 +10,8 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
   const imageRef = useRef(null);
   const overlayRef = useRef(null);
   const hoverInfoRef = useRef(null);
+  const logoRef = useRef(null);
+  const verMasRef = useRef(null);
 
 
   useGSAP(() => {
@@ -49,7 +51,7 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
     });
 
     // Rotate Logo Icon
-    gsap.to(hoverInfoRef.current.querySelector('img'), {
+    gsap.to(logoRef.current, {
       rotate: 360,
       duration: 1.5,
       ease: "power2.inOut",
@@ -65,6 +67,16 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
       duration: 1.2,
       ease: "power3.inOut",
       overwrite: true
+    });
+
+    // Pulse Ver Mas
+    gsap.to(verMasRef.current, {
+      opacity: 0.5,
+      duration: 0.6,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: 0.8
     });
 
     gsap.to(imageRef.current, {
@@ -107,9 +119,17 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
     });
 
     // Reset Logo Rotation
-    gsap.to(hoverInfoRef.current.querySelector('img'), {
+    gsap.to(logoRef.current, {
       rotate: 0,
       duration: 0.5,
+      overwrite: true
+    });
+
+    // Stop Ver Mas Pulse
+    gsap.killTweensOf(verMasRef.current);
+    gsap.to(verMasRef.current, {
+      opacity: 0,
+      duration: 0.3,
       overwrite: true
     });
 
@@ -198,8 +218,18 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
           ref={hoverInfoRef} 
           className="flex flex-col items-center gap-3 mb-8 pointer-events-none"
         >
-          <img src="/Trebol_2.svg" alt="Trebol" className="w-14 h-14" />
-          <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-brand-accent">Ver más</span>
+          <img 
+            ref={logoRef}
+            src="/Trebol_2.svg" 
+            alt="Trebol" 
+            className="w-14 h-14" 
+          />
+          <span 
+            ref={verMasRef}
+            className="text-[10px] font-bold tracking-[0.4em] uppercase text-brand-accent"
+          >
+            Ver más
+          </span>
         </div>
 
         <div className="flex flex-col gap-2.5">
