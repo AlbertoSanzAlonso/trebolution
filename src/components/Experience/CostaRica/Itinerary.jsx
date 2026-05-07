@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, ArrowDown, X, Building2, Calendar, MapPin } from 'lucide-react';
+import { Download, ArrowDown, X, Building2, Calendar, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ItineraryCard from './ItineraryCard';
 
@@ -81,6 +81,16 @@ const Itinerary = () => {
     },
   ];
 
+  const currentIndex = selectedDay ? itineraryData.findIndex(item => item.day === selectedDay.day) : -1;
+
+  const handlePrev = () => {
+    if (currentIndex > 0) setSelectedDay(itineraryData[currentIndex - 1]);
+  };
+
+  const handleNext = () => {
+    if (currentIndex < itineraryData.length - 1) setSelectedDay(itineraryData[currentIndex + 1]);
+  };
+
   return (
     <section className="py-40 px-6 md:px-24 bg-brand-secondary relative">
       <div className="max-w-[1600px] mx-auto">
@@ -89,7 +99,7 @@ const Itinerary = () => {
           <h2 className="text-5xl md:text-6xl font-serif text-brand-primary">Itinerario <span className="italic">experiencial</span></h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-10 gap-y-20">
           {itineraryData.map((item, i) => (
             <ItineraryCard 
               key={i} 
@@ -143,6 +153,28 @@ const Itinerary = () => {
               >
                 <X size={24} />
               </button>
+
+              {/* Navigation Arrows */}
+              <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 pointer-events-none z-40">
+                <button 
+                  onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                  disabled={currentIndex === 0}
+                  className={`pointer-events-auto p-4 rounded-full transition-all duration-300 ${
+                    currentIndex === 0 ? 'opacity-0 scale-50' : 'opacity-40 hover:opacity-100 hover:bg-white/10 text-brand-primary md:text-white'
+                  }`}
+                >
+                  <ChevronLeft size={48} strokeWidth={1} />
+                </button>
+                <button 
+                  onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                  disabled={currentIndex === itineraryData.length - 1}
+                  className={`pointer-events-auto p-4 rounded-full transition-all duration-300 ${
+                    currentIndex === itineraryData.length - 1 ? 'opacity-0 scale-50' : 'opacity-40 hover:opacity-100 hover:bg-white/10 text-brand-primary'
+                  }`}
+                >
+                  <ChevronRight size={48} strokeWidth={1} />
+                </button>
+              </div>
 
               {/* Image Side */}
               <div className="w-full md:w-1/2 h-[300px] md:h-full relative overflow-hidden shrink-0">
@@ -208,8 +240,12 @@ const Itinerary = () => {
                     </div>
                   </div>
                   
-                  <button className="mt-4 bg-brand-primary text-white py-6 rounded-xl font-bold uppercase tracking-[0.2em] text-xs hover:bg-brand-accent transition-all shadow-xl">
-                    Siguiente etapa del viaje
+                  <button 
+                    onClick={handleNext}
+                    disabled={currentIndex === itineraryData.length - 1}
+                    className="mt-4 bg-brand-primary text-white py-6 rounded-xl font-bold uppercase tracking-[0.2em] text-xs hover:bg-brand-accent transition-all shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {currentIndex === itineraryData.length - 1 ? 'Última etapa' : 'Siguiente etapa del viaje'}
                   </button>
                 </div>
               </div>

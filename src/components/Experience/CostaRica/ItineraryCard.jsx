@@ -12,15 +12,20 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
   const hoverInfoRef = useRef(null);
   const logoRef = useRef(null);
   const verMasRef = useRef(null);
+  const textBlockRef = useRef(null);
+  const dateRef = useRef(null);
+  const titleRef = useRef(null);
+  const descRef = useRef(null);
+  const hotelInfoRef = useRef(null);
 
 
   useGSAP(() => {
     // Initial state to ensure cards are closed on mount/render
     gsap.set(contentRef.current, { y: 0 });
-    gsap.set(petalRef.current, { 
-      scale: 5, 
-      rotate: 20, 
-      x: "50%", 
+    gsap.set(petalRef.current, {
+      scale: 5,
+      rotate: 20,
+      x: "50%",
       y: "70%",
       transformOrigin: 'center'
     });
@@ -32,10 +37,35 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
   const { contextSafe } = useGSAP({ scope: containerRef });
 
   const onMouseEnter = contextSafe(() => {
-    // Center Text
+    // Center Text block vertically
     gsap.to(contentRef.current, {
-      y: "-55%",
-      scale: 1.1,
+      y: "-35%",
+      duration: 0.8,
+      ease: "power4.inOut",
+      overwrite: true
+    });
+
+    // Smooth Center individual lines
+    gsap.to([dateRef.current, titleRef.current, descRef.current, hotelInfoRef.current], {
+      x: "50%",
+      xPercent: -50,
+      duration: 0.8,
+      ease: "power4.inOut",
+      overwrite: true
+    });
+
+    // Scale Text Block
+    gsap.to(textBlockRef.current, {
+      scale: 1.2,
+      transformOrigin: "center center",
+      duration: 0.8,
+      ease: "power4.inOut",
+      overwrite: true
+    });
+
+    // Center Hotel Info
+    gsap.to(hotelInfoRef.current, {
+      justifyContent: "center",
       duration: 0.8,
       ease: "power4.inOut",
       overwrite: true
@@ -102,10 +132,34 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
   });
 
   const onMouseLeave = contextSafe(() => {
-    // Reset Text
+    // Reset Text block vertically
     gsap.to(contentRef.current, {
       y: "0%",
+      duration: 0.6,
+      ease: "power2.out",
+      overwrite: true
+    });
+
+    // Reset centering translation
+    gsap.to([dateRef.current, titleRef.current, descRef.current, hotelInfoRef.current], {
+      x: "0%",
+      xPercent: 0,
+      duration: 0.6,
+      ease: "power2.out",
+      overwrite: true
+    });
+
+    // Reset Text Block Scale
+    gsap.to(textBlockRef.current, {
       scale: 1,
+      duration: 0.6,
+      ease: "power2.out",
+      overwrite: true
+    });
+
+    // Reset Hotel Info
+    gsap.to(hotelInfoRef.current, {
+      justifyContent: "flex-start",
       duration: 0.6,
       ease: "power2.out",
       overwrite: true
@@ -198,33 +252,45 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
       {/* THE PETAL BLOCK (From the sketch) */}
       <div
         ref={petalRef}
-        className="absolute bottom-0 left-0 w-32 h-32 bg-white z-10"
+        className="absolute bottom-0 left-0 w-32 h-32 z-10 pointer-events-none"
         style={{
-          clipPath: 'path("M 50,100 C 50,100 0,60 0,35 C 0,15 15,0 35,0 C 45,0 50,10 50,10 C 50,10 55,0 65,0 C 85,0 100,15 100,35 C 100,60 50,100 50,100 Z")',
+          filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.15))',
           transform: 'translate(50%, 70%) rotate(20deg) scale(5)',
           transformOrigin: 'center'
         }}
       >
-        {/* White base */}
-        <div className="absolute inset-0 bg-white" />
+        <div
+          className="w-full h-full relative overflow-hidden shadow-inner"
+          style={{
+            clipPath: 'path("M 50,100 C 50,100 0,60 0,35 C 0,15 15,0 35,0 C 45,0 50,10 50,10 C 50,10 55,0 65,0 C 85,0 100,15 100,35 C 100,60 50,100 50,100 Z")',
+            background: 'radial-gradient(circle at 30% 20%, rgba(255,255,255,0.95) 0%, rgba(240,240,240,0.9) 100%)',
+            backdropFilter: 'blur(8px)'
+          }}
+        >
+          {/* Logo Watermark */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none">
+            <img src="/Trebol_2.svg" alt="" className="w-1/2 h-1/2 object-contain" />
+          </div>
+
+        </div>
       </div>
 
       <div
         ref={contentRef}
-        className="mt-auto relative z-20 flex flex-col px-10 pb-10 pt-0"
+        className="mt-auto relative z-20 flex flex-col px-12 pb-12 pt-0"
       >
         {/* Hover Info (Logo + Ver Más) */}
-        <div 
-          ref={hoverInfoRef} 
-          className="flex flex-col items-center gap-3 mb-8 pointer-events-none"
+        <div
+          ref={hoverInfoRef}
+          className="flex flex-col items-center gap-3 mb-10 pointer-events-none"
         >
-          <img 
+          <img
             ref={logoRef}
-            src="/Trebol_2.svg" 
-            alt="Trebol" 
-            className="w-14 h-14" 
+            src="/Trebol_2.svg"
+            alt="Trebol"
+            className="w-14 h-14"
           />
-          <span 
+          <span
             ref={verMasRef}
             className="text-[10px] font-bold tracking-[0.4em] uppercase text-brand-accent"
           >
@@ -232,21 +298,30 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
           </span>
         </div>
 
-        <div className="flex flex-col gap-2.5">
+        <div ref={textBlockRef} className="flex flex-col gap-2.5">
           <div className="flex flex-col gap-0.5">
-            <span className="text-[9px] font-bold text-brand-accent tracking-[0.15em] uppercase">
+            <span
+              ref={dateRef}
+              className="text-[9px] font-bold text-brand-accent tracking-[0.15em] uppercase w-fit max-w-full"
+            >
               {date} | {location}
             </span>
-            <h4 className="text-xl font-serif text-brand-primary leading-tight">
+            <h4
+              ref={titleRef}
+              className="text-xl font-serif text-brand-primary leading-tight w-fit max-w-full"
+            >
               {title}
             </h4>
           </div>
 
-          <p className="text-[11px] text-brand-primary/60 font-light leading-relaxed mb-1 line-clamp-2">
+          <p
+            ref={descRef}
+            className="text-[11px] text-brand-primary/60 font-light leading-relaxed mb-1 line-clamp-2 w-fit max-w-full"
+          >
             {desc}
           </p>
 
-          <div className="mt-2 flex items-center gap-3">
+          <div ref={hotelInfoRef} className="mt-2 flex items-center gap-3 w-fit max-w-full">
             <div className="w-6 h-6 rounded-full bg-brand-secondary flex items-center justify-center text-brand-accent">
               <Building2 size={10} />
             </div>
