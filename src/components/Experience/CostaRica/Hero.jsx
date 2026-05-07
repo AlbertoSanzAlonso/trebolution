@@ -4,11 +4,11 @@ import { ArrowDown, Download } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="relative h-[110vh] flex items-center justify-start px-6 md:px-24 overflow-hidden">
+    <section className="relative h-[110vh] flex items-center justify-start px-6 md:px-40 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
-          src="/home/albertosanzdev/.gemini/antigravity/brain/1c87cd0e-f23a-4b7c-9036-55ccab570c9f/costa_rica_hero_1778151943812.png" 
-          alt="Costa Rica Waterfall" 
+          src="/assets/images/costa-rica-hero.png" 
+          alt="Costa Rica Landscape" 
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/35" />
@@ -31,9 +31,9 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-6">
             <button className="bg-brand-accent text-white px-12 py-6 text-xs font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-xl">
-              QUIERO MÁS INFORMACIÓN
+              Solicitar acceso a la experiencia
             </button>
-            <button className="border border-white/50 bg-white/10 backdrop-blur-sm text-white px-12 py-6 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-[#05051E] transition-all flex items-center gap-3">
+            <button className="border border-white/50 bg-white/10 backdrop-blur-sm text-white px-12 py-6 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-brand-primary transition-all flex items-center gap-3">
               VER PROGRAMA COMPLETO <Download size={14} />
             </button>
           </div>

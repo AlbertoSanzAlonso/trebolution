@@ -223,7 +223,7 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
   return (
     <div
       ref={containerRef}
-      className="flex flex-col shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden aspect-[2/3] cursor-pointer rounded-3xl transform-gpu"
+      className="flex flex-col shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden aspect-2/3 cursor-pointer rounded-3xl transform-gpu"
       style={{ WebkitBackfaceVisibility: 'hidden' }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

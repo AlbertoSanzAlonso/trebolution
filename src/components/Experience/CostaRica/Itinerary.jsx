@@ -109,14 +109,14 @@ const Itinerary = () => {
           ))}
           
           {/* Final Download Card */}
-          <div className="bg-[#142614] p-10 flex flex-col items-center justify-center text-center gap-10 text-white group cursor-pointer relative overflow-hidden aspect-[2/3] rounded-3xl">
+          <div className="bg-[#142614] p-10 flex flex-col items-center justify-center text-center gap-10 text-white group cursor-pointer relative overflow-hidden aspect-2/3 rounded-3xl">
             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-accent/10 rounded-bl-full pointer-events-none" />
             <div className="relative">
                <div className="absolute inset-0 bg-brand-accent/20 blur-xl rounded-full" />
                <Download size={48} className="text-brand-accent group-hover:scale-110 transition-transform relative z-10" />
             </div>
             <div className="flex flex-col gap-6">
-              <h4 className="text-2xl font-serif uppercase tracking-[0.1em] leading-tight">PROGRAMA <br /> COMPLETO 2026</h4>
+              <h4 className="text-2xl font-serif uppercase tracking-widest leading-tight">PROGRAMA <br /> COMPLETO 2026</h4>
               <p className="text-[12px] opacity-50 uppercase tracking-[0.2em] leading-relaxed max-w-[200px]">Descarga el itinerario detallado con hoteles premium y experiencias exclusivas</p>
             </div>
             <div className="mt-8 flex flex-col items-center gap-2">
@@ -130,7 +130,7 @@ const Itinerary = () => {
       {/* PREMIUM MODAL */}
       <AnimatePresence>
         {selectedDay && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-12">
+          <div className="fixed inset-0 z-100 flex items-center justify-center p-6 md:p-12">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -144,7 +144,7 @@ const Itinerary = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-white w-full max-w-6xl h-full max-h-[90vh] rounded-[2rem] overflow-hidden shadow-2xl relative z-10 flex flex-col md:flex-row"
+              className="bg-white w-full max-w-6xl h-full max-h-[90vh] rounded-4xl overflow-hidden shadow-2xl relative z-10 flex flex-col md:flex-row"
             >
               {/* Close Button */}
               <button 
@@ -183,7 +183,7 @@ const Itinerary = () => {
                   alt={selectedDay.title} 
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-12 left-12 text-white">
                   <span className="text-brand-accent text-[12px] font-bold tracking-[0.4em] uppercase block mb-4">COSTA RICA EXPERIENCE</span>
                   <h3 className="text-4xl md:text-6xl font-serif leading-tight">{selectedDay.day}</h3>

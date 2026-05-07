@@ -16,19 +16,39 @@
 
 @layer base {
   body {
-    @apply bg-white text-[#05051E] font-sans font-light;
+    background-color: white;
+    color: var(--color-brand-primary);
+    font-family: var(--font-sans);
+    font-weight: 300;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif font-normal;
+    font-family: var(--font-serif);
+    font-weight: 400;
     letter-spacing: -0.02em;
   }
 }
 
 @layer components {
   .whatsapp-btn {
-    @apply fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-50;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 4rem;
+    height: 4rem;
+    background-color: #25D366;
+    color: white;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    z-index: 50;
+  }
+  .whatsapp-btn:hover {
+    transform: scale(1.1);
   }
 }
 

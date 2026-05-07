@@ -35,7 +35,7 @@ const ExperiencePage = () => {
             className="absolute inset-0 w-full h-full object-cover"
           />
         )}
-        <div className="absolute inset-0 bg-[#05051E]/20" />
+        <div className="absolute inset-0 bg-brand-primary/20" />
         
         <div className="relative z-10 w-full max-w-[1400px] mt-24">
           <h1 className="text-white font-serif font-normal text-[5.5rem] md:text-[8rem] leading-[0.8] uppercase tracking-tighter">
@@ -56,19 +56,19 @@ const ExperiencePage = () => {
       <section className="py-32 px-6 md:px-24 bg-white">
         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-20 items-start">
           <div className="flex flex-col gap-4">
-            <h4 className="text-[11px] font-sans font-bold tracking-[0.5em] uppercase text-[#B59D7C]">
+            <h4 className="text-[11px] font-sans font-bold tracking-[0.5em] uppercase text-brand-accent">
               {experience.sectionSubtitle}
             </h4>
-            <h2 className="text-[3.8rem] md:text-[5.5rem] font-serif font-normal text-[#05051E] leading-[1] uppercase">
+            <h2 className="text-[3.8rem] md:text-[5.5rem] font-serif font-normal text-brand-primary leading-[1] uppercase">
               {experience.sectionTitle}
             </h2>
           </div>
           
           <div className="flex flex-col gap-10 lg:pt-24">
-            <p className="text-[20px] font-sans font-bold text-[#05051E] leading-relaxed">
+            <p className="text-[20px] font-sans font-bold text-brand-primary leading-relaxed">
               Un viaje exclusivo entre aromas, colores y espiritualidad.
             </p>
-            <p className="text-[18px] font-sans text-[#05051E]/80 leading-[1.8] font-light">
+            <p className="text-[18px] font-sans text-brand-primary/80 leading-[1.8] font-light">
               {experience.description}
             </p>
           </div>
@@ -86,7 +86,7 @@ const ExperiencePage = () => {
         <MessageCircle size={32} className="fill-white text-[#25D366]" />
       </a>
 
-      <Link to={experience.nextPath} className="fixed bottom-8 right-24 bg-[#05051E] text-white px-12 py-5 flex flex-col items-start gap-1 shadow-2xl transition-all hover:bg-[#B59D7C] z-40">
+      <Link to={experience.nextPath} className="fixed bottom-8 right-24 bg-brand-primary text-white px-12 py-5 flex flex-col items-start gap-1 shadow-2xl transition-all hover:bg-brand-accent z-40">
         <span className="text-[9px] opacity-60 tracking-[0.2em] uppercase">VER SIGUIENTE</span>
         <span className="text-[13px] font-medium tracking-wide uppercase">{experience.ctaLabel}</span>
       </Link>
