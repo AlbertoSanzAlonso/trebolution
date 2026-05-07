@@ -1,65 +1,74 @@
 import React, { useRef } from 'react';
-import { Building2, Eye } from 'lucide-react';
+import { Building2 } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }) => {
   const containerRef = useRef(null);
   const contentRef = useRef(null);
-  const pathRef = useRef(null);
+  const petalRef = useRef(null);
   const imageRef = useRef(null);
   const overlayRef = useRef(null);
-  const eyeRef = useRef(null);
+  const hoverInfoRef = useRef(null);
 
-  // Path coordinates for the dossier mountain
-  const normalPath = "M0 40 L0 15 C10 15, 20 0, 40 0 C70 0, 90 25, 100 25 L100 40 Z";
-  const hoverPath = "M0 40 L0 40 C10 40, 20 40, 40 40 C70 40, 90 40, 100 40 L100 40 Z";
 
   useGSAP(() => {
     // Initial state to ensure cards are closed on mount/render
     gsap.set(contentRef.current, { y: 0 });
-    gsap.set(pathRef.current, { attr: { d: normalPath } });
+    gsap.set(petalRef.current, { 
+      scale: 5, 
+      rotate: 20, 
+      x: "50%", 
+      y: "70%",
+      transformOrigin: 'center'
+    });
     gsap.set(imageRef.current, { scale: 1 });
     gsap.set(overlayRef.current, { opacity: 0 });
-    gsap.set(eyeRef.current, { opacity: 0, scale: 0.5 });
+    gsap.set(hoverInfoRef.current, { opacity: 0, y: 20 });
   }, { scope: containerRef });
 
   const { contextSafe } = useGSAP({ scope: containerRef });
 
   const onMouseEnter = contextSafe(() => {
+    // Center Text
     gsap.to(contentRef.current, {
-      y: "110%",
+      y: "-65%",
+      scale: 1.1,
       duration: 0.8,
+      ease: "power4.inOut",
+      overwrite: true
+    });
+
+    gsap.to(hoverInfoRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      delay: 0.3,
+      ease: "power2.out",
+      overwrite: true
+    });
+
+    // Expand Petal to cover whole background
+    gsap.to(petalRef.current, {
+      scale: 30,
+      rotate: 0,
+      x: "-50%",
+      y: "50%",
+      duration: 1.2,
       ease: "power3.inOut",
       overwrite: true
     });
 
-    gsap.to(pathRef.current, {
-      attr: { d: hoverPath },
-      duration: 0.5,
-      ease: "power2.inOut",
-      overwrite: true
-    });
-
     gsap.to(imageRef.current, {
-      scale: 1.08,
-      duration: 1.2,
+      scale: 1.2,
+      duration: 1.5,
       ease: "power2.out",
       overwrite: true
     });
 
     gsap.to(overlayRef.current, {
-      opacity: 0.3,
+      opacity: 0.4,
       duration: 0.6,
-      overwrite: true
-    });
-
-    // Reveal Eye Icon
-    gsap.to(eyeRef.current, {
-      opacity: 1,
-      scale: 1,
-      duration: 0.8,
-      ease: "back.out(1.7)",
       overwrite: true
     });
 
@@ -73,17 +82,30 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
   });
 
   const onMouseLeave = contextSafe(() => {
+    // Reset Text
     gsap.to(contentRef.current, {
       y: "0%",
-      duration: 0.4,
+      scale: 1,
+      duration: 0.6,
       ease: "power2.out",
       overwrite: true
     });
 
-    gsap.to(pathRef.current, {
-      attr: { d: normalPath },
-      duration: 0.4,
-      ease: "back.out(1.2)",
+    gsap.to(hoverInfoRef.current, {
+      opacity: 0,
+      y: 20,
+      duration: 0.3,
+      overwrite: true
+    });
+
+    // Reset Petal
+    gsap.to(petalRef.current, {
+      scale: 5,
+      rotate: 20,
+      x: "50%",
+      y: "70%",
+      duration: 0.8,
+      ease: "power2.inOut",
       overwrite: true
     });
 
@@ -96,14 +118,6 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
 
     gsap.to(overlayRef.current, {
       opacity: 0,
-      duration: 0.3,
-      overwrite: true
-    });
-
-    // Hide Eye Icon
-    gsap.to(eyeRef.current, {
-      opacity: 0,
-      scale: 0.5,
       duration: 0.3,
       overwrite: true
     });
@@ -118,37 +132,27 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
   });
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      className="bg-white flex flex-col shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden aspect-[2/3] cursor-pointer rounded-3xl transform-gpu"
+      className="flex flex-col shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden aspect-[2/3] cursor-pointer rounded-3xl transform-gpu"
       style={{ WebkitBackfaceVisibility: 'hidden' }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
     >
-      
+
       {/* FULL BACKGROUND IMAGE */}
-      <div className="absolute inset-0 w-full h-full z-0 bg-brand-secondary/10">
-        <img 
+      <div className="absolute inset-0 w-full h-full z-0">
+        <img
           ref={imageRef}
-          src={img} 
-          alt={title} 
-          className="w-full h-full object-cover"
+          src={img}
+          alt={title}
+          className="w-full h-full object-cover scale-110"
         />
-        <div 
+        <div
           ref={overlayRef}
-          className="absolute inset-0 bg-black opacity-0 pointer-events-none" 
+          className="absolute inset-0 bg-black opacity-0 pointer-events-none"
         />
-        
-        {/* Eye Icon Watermark */}
-        <div 
-          ref={eyeRef}
-          className="absolute inset-0 flex items-center justify-center text-white z-20 pointer-events-none"
-        >
-          <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 shadow-2xl">
-            <Eye size={32} />
-          </div>
-        </div>
       </div>
 
       {/* Day Badge */}
@@ -156,46 +160,55 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
         {day}
       </div>
 
-      {/* CONTENT AREA */}
-      <div 
-        ref={contentRef}
-        className="mt-auto relative z-10 flex flex-col"
+      {/* THE PETAL BLOCK (From the sketch) */}
+      <div
+        ref={petalRef}
+        className="absolute bottom-0 left-0 w-32 h-32 bg-white z-10"
+        style={{
+          clipPath: 'path("M 50,100 C 50,100 0,60 0,35 C 0,15 15,0 35,0 C 45,0 50,10 50,10 C 50,10 55,0 65,0 C 85,0 100,15 100,35 C 100,60 50,100 50,100 Z")',
+          transform: 'translate(50%, 70%) rotate(20deg) scale(5)',
+          transformOrigin: 'center'
+        }}
       >
-        {/* The Curve - Morphing SVG */}
-        <div className="w-full h-16 relative -mb-[1px]">
-          <svg 
-            viewBox="0 0 100 40" 
-            preserveAspectRatio="none" 
-            className="w-full h-full fill-white"
-          >
-            <path ref={pathRef} d={normalPath} />
-          </svg>
+        {/* White base */}
+        <div className="absolute inset-0 bg-white" />
+      </div>
+
+      <div
+        ref={contentRef}
+        className="mt-auto relative z-20 flex flex-col px-10 pb-10 pt-0"
+      >
+        {/* Hover Info (Logo + Ver Más) */}
+        <div 
+          ref={hoverInfoRef} 
+          className="flex flex-col items-center gap-3 mb-8 pointer-events-none"
+        >
+          <img src="/Trebol_2.svg" alt="Trebol" className="w-14 h-14" />
+          <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-brand-accent">Ver más</span>
         </div>
 
-        {/* White Text Area */}
-        <div className="bg-white px-6 pb-6 pt-0 flex flex-col gap-2.5">
+        <div className="flex flex-col gap-2.5">
           <div className="flex flex-col gap-0.5">
-            <span className="text-[9px] font-bold text-brand-accent tracking-[0.15em] opacity-80 uppercase">
+            <span className="text-[9px] font-bold text-brand-accent tracking-[0.15em] uppercase">
               {date} | {location}
             </span>
-            <h4 className="text-lg font-serif text-brand-primary leading-tight">
+            <h4 className="text-xl font-serif text-brand-primary leading-tight">
               {title}
             </h4>
           </div>
-          
-          <p className="text-[11px] text-brand-primary/60 font-light leading-relaxed mb-1 line-clamp-2 lg:max-xl:line-clamp-1">
+
+          <p className="text-[11px] text-brand-primary/60 font-light leading-relaxed mb-1 line-clamp-2">
             {desc}
           </p>
 
-          {/* Hotel Footer - Border removed for cleaner look */}
-          <div className="mt-auto pt-3 flex items-center gap-3 lg:max-xl:hidden">
-             <div className="w-6 h-6 rounded-full bg-brand-secondary flex items-center justify-center text-brand-accent">
-                <Building2 size={10} />
-             </div>
-             <div className="flex flex-col">
-                <span className="text-[7.5px] font-bold text-brand-primary/30 uppercase tracking-widest mb-0.5">Alojamiento</span>
-                <span className="text-[10px] font-medium text-brand-primary/80">{hotel}</span>
-             </div>
+          <div className="mt-2 flex items-center gap-3">
+            <div className="w-6 h-6 rounded-full bg-brand-secondary flex items-center justify-center text-brand-accent">
+              <Building2 size={10} />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[7.5px] font-bold text-brand-primary/30 uppercase tracking-widest mb-0.5">Alojamiento</span>
+              <span className="text-[10px] font-medium text-brand-primary/80">{hotel}</span>
+            </div>
           </div>
         </div>
       </div>
