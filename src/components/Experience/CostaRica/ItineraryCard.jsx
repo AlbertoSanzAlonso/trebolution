@@ -32,7 +32,7 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
   const onMouseEnter = contextSafe(() => {
     // Center Text
     gsap.to(contentRef.current, {
-      y: "-65%",
+      y: "-55%",
       scale: 1.1,
       duration: 0.8,
       ease: "power4.inOut",
@@ -45,6 +45,14 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
       duration: 0.6,
       delay: 0.3,
       ease: "power2.out",
+      overwrite: true
+    });
+
+    // Rotate Logo Icon
+    gsap.to(hoverInfoRef.current.querySelector('img'), {
+      rotate: 360,
+      duration: 1.5,
+      ease: "power2.inOut",
       overwrite: true
     });
 
@@ -95,6 +103,13 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
       opacity: 0,
       y: 20,
       duration: 0.3,
+      overwrite: true
+    });
+
+    // Reset Logo Rotation
+    gsap.to(hoverInfoRef.current.querySelector('img'), {
+      rotate: 0,
+      duration: 0.5,
       overwrite: true
     });
 
