@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import philosophyBg from '../../../assets/philosophy_bg.png';
+import philosophyBg from '../../../assets/philosophy_bg_clean.png';
 
 const Philosophy = () => {
   return (
@@ -38,7 +38,7 @@ const Philosophy = () => {
             </motion.div>
           </div>
 
-          {/* Visual Element */}
+          {/* Visual Element with Text Overlay */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -53,6 +53,22 @@ const Philosophy = () => {
                 className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-brand-primary/10 group-hover:bg-transparent transition-colors duration-700" />
+              
+              {/* Slogan Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center p-12">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 1 }}
+                  className="text-center"
+                >
+                  <h3 className="text-white text-4xl md:text-6xl font-serif leading-tight lowercase tracking-tight">
+                    <span className="block italic opacity-90">diseñamos</span>
+                    <span className="block font-light">lo que vivimos</span>
+                  </h3>
+                </motion.div>
+              </div>
             </div>
             
             {/* Decorative element */}
