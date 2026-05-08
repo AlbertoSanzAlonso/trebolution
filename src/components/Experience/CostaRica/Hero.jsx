@@ -20,20 +20,23 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <span className="text-[13px] md:text-[15px] font-bold tracking-[0.4em] uppercase opacity-90 block mb-6">
-            COSTA RICA | 8 DÍAS - 7 NOCHES
+          <span className="text-[13px] md:text-[15px] font-extralight tracking-[0.4em] uppercase opacity-90 block mb-6">
+            Costa Rica Trebolution Experience
           </span>
-          <h1 className="text-6xl md:text-[10rem] font-serif leading-[0.85] mb-10 tracking-tighter">
-            Costa Rica
+          <h1 className="text-6xl md:text-[10rem] font-serif leading-[0.85] mb-10 tracking-tighter uppercase">
+            Pura vida <br /> <span className="italic font-light">en su máxima expresión</span>
           </h1>
-          <p className="text-xl md:text-2xl max-w-2xl opacity-90 leading-relaxed mb-12 font-light">
-            Un viaje que marca un antes y un después
+          <p className="text-xl md:text-2xl max-w-2xl opacity-90 leading-relaxed mb-4 font-light italic">
+            un viaje para sentir el mundo de otra manera
+          </p>
+          <p className="text-lg md:text-xl max-w-3xl opacity-80 leading-relaxed mb-12 font-light">
+            Una experiencia auténtica, consciente y transformadora, diseñada desde la vivencia real del destino y acompañada por Trebolution desde el primer momento.
           </p>
           <div className="flex flex-col sm:flex-row gap-6">
-            <button className="bg-brand-accent text-white px-12 py-6 text-xs font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-xl">
+            <button className="bg-brand-accent text-brand-primary px-12 py-6 text-xs font-extralight uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-xl rounded-full">
               Solicitar acceso a la experiencia
             </button>
-            <button className="border border-white/50 bg-white/10 backdrop-blur-sm text-white px-12 py-6 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-brand-primary transition-all flex items-center gap-3">
+            <button className="border border-white/50 bg-white/10 backdrop-blur-sm text-white px-12 py-6 text-xs font-extralight uppercase tracking-[0.2em] hover:bg-white hover:text-brand-primary transition-all flex items-center gap-3 rounded-full">
               VER PROGRAMA COMPLETO <Download size={14} />
             </button>
           </div>
@@ -41,7 +44,7 @@ const Hero = () => {
       </div>
       
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 animate-bounce">
-        <span className="text-[9px] uppercase tracking-widest font-bold">Scroll para descubrir</span>
+        <span className="text-[9px] uppercase tracking-widest font-extralight">Scroll para descubrir</span>
         <ArrowDown size={14} />
       </div>
     </section>

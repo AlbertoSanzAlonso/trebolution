@@ -26,7 +26,7 @@ const Features = () => {
   ];
 
   return (
-    <section className="bg-brand-dark py-40 px-6 md:px-24">
+    <section className="bg-brand-primary py-40 px-6 md:px-24">
       <div className="max-w-[1400px] mx-auto">
         {/* Intro Text */}
         <div className="max-w-4xl mb-32">
@@ -46,7 +46,7 @@ const Features = () => {
                 {f.icon}
               </div>
               <div className="flex flex-col gap-4">
-                <h3 className="text-lg font-serif font-normal">{f.title}</h3>
+                <h3 className="text-lg font-serif font-extralight uppercase">{f.title}</h3>
                 <p className="text-[14px] font-light opacity-50 leading-relaxed max-w-[260px]">{f.desc}</p>
               </div>
             </div>

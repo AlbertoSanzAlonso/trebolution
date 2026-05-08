@@ -33,7 +33,7 @@ const CRFooter = () => {
             alt="Logo" 
             className="w-56"
           />
-          <p className="text-white/30 text-base font-light leading-relaxed max-w-sm">
+          <p className="text-brand-text-light/40 text-base font-light leading-relaxed max-w-sm">
             Diseñamos experiencias de viaje profundas que conectan personas con lugares y con su propia esencia. Trebolution es evolución a través del viaje.
           </p>
           <div className="flex gap-6">
@@ -50,8 +50,8 @@ const CRFooter = () => {
         </div>
 
         <div className="flex flex-col gap-8">
-          <h4 className="text-[11px] font-bold tracking-[0.4em] uppercase text-white/60">NAVEGACIÓN</h4>
-          <div className="flex flex-col gap-5 text-sm text-white/40 font-light tracking-wide">
+          <h4 className="text-[11px] font-extralight tracking-[0.4em] uppercase text-brand-text-light/60">NAVEGACIÓN</h4>
+          <div className="flex flex-col gap-5 text-sm text-brand-text-light/40 font-light tracking-wide">
             <a href="#" className="hover:text-brand-accent transition-colors">El viaje</a>
             <a href="#" className="hover:text-brand-accent transition-colors">Experiencias</a>
             <a href="#" className="hover:text-brand-accent transition-colors">Programa</a>
@@ -60,8 +60,8 @@ const CRFooter = () => {
         </div>
 
         <div className="flex flex-col gap-8">
-          <h4 className="text-[11px] font-bold tracking-[0.4em] uppercase text-white/60">SOBRE NOSOTROS</h4>
-          <div className="flex flex-col gap-5 text-sm text-white/40 font-light tracking-wide">
+          <h4 className="text-[11px] font-extralight tracking-[0.4em] uppercase text-brand-text-light/60">SOBRE NOSOTROS</h4>
+          <div className="flex flex-col gap-5 text-sm text-brand-text-light/40 font-light tracking-wide">
             <a href="#" className="hover:text-brand-accent transition-colors">Quiénes somos</a>
             <a href="#" className="hover:text-brand-accent transition-colors">Nuestra filosofía</a>
             <a href="#" className="hover:text-brand-accent transition-colors">Comunidad</a>
@@ -70,8 +70,8 @@ const CRFooter = () => {
         </div>
 
         <div className="flex flex-col gap-8">
-          <h4 className="text-[11px] font-bold tracking-[0.4em] uppercase text-white/60">LEGAL</h4>
-          <div className="flex flex-col gap-5 text-sm text-white/40 font-light tracking-wide">
+          <h4 className="text-[11px] font-extralight tracking-[0.4em] uppercase text-brand-text-light/60">LEGAL</h4>
+          <div className="flex flex-col gap-5 text-sm text-brand-text-light/40 font-light tracking-wide">
             <a href="#" className="hover:text-brand-accent transition-colors">Términos y condiciones</a>
             <a href="#" className="hover:text-brand-accent transition-colors">Política de privacidad</a>
             <a href="#" className="hover:text-brand-accent transition-colors">Política de cookies</a>

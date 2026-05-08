@@ -245,7 +245,7 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
       </div>
 
       {/* Day Badge */}
-      <div className="absolute top-4 left-4 z-30 bg-brand-primary/90 text-white text-[9px] font-bold px-4 py-1.5 tracking-widest uppercase shadow-xl">
+      <div className="absolute top-4 left-4 z-30 bg-brand-primary/90 text-white text-[9px] font-extralight px-4 py-1.5 tracking-widest uppercase shadow-xl">
         {day}
       </div>
 
@@ -292,7 +292,7 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
           />
           <span
             ref={verMasRef}
-            className="text-[10px] font-bold tracking-[0.4em] uppercase text-brand-accent"
+            className="text-[10px] font-extralight tracking-[0.4em] uppercase text-brand-primary opacity-0"
           >
             Ver más
           </span>
@@ -302,7 +302,7 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
           <div className="flex flex-col gap-0.5">
             <span
               ref={dateRef}
-              className="text-[9px] font-bold text-brand-accent tracking-[0.15em] uppercase w-fit max-w-full"
+              className="text-[9px] font-extralight text-brand-primary/60 tracking-[0.15em] uppercase w-fit max-w-full"
             >
               {date} | {location}
             </span>

@@ -95,33 +95,46 @@ const Itinerary = () => {
     <section className="py-40 px-6 md:px-24 bg-brand-secondary relative">
       <div className="max-w-[1600px] mx-auto">
         <div className="text-center mb-24">
-          <span className="text-brand-accent text-[11px] font-bold tracking-[0.4em] uppercase block mb-6">UN VISTAZO A LO QUE VIVIRÁS</span>
+          <span className="text-brand-text-light text-[11px] font-extralight tracking-[0.4em] uppercase block mb-6">UN VISTAZO A LO QUE VIVIRÁS</span>
           <h2 className="text-5xl md:text-6xl font-serif text-brand-primary">Itinerario <span className="italic">experiencial</span></h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-10 gap-y-20">
+        {/* Desktop Grid / Mobile Scroll */}
+        <div className="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pb-12 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-10 gap-y-20 custom-scrollbar-hide">
+          <style>{`
+            .custom-scrollbar-hide::-webkit-scrollbar {
+              display: none;
+            }
+            .custom-scrollbar-hide {
+              -ms-overflow-style: none;
+              scrollbar-width: none;
+            }
+          `}</style>
           {itineraryData.map((item, i) => (
-            <ItineraryCard 
-              key={i} 
-              {...item} 
-              onClick={() => setSelectedDay(item)}
-            />
+            <div key={i} className="shrink-0 w-[85vw] sm:w-[400px] md:w-auto snap-center mr-8 md:mr-0">
+              <ItineraryCard 
+                {...item} 
+                onClick={() => setSelectedDay(item)}
+              />
+            </div>
           ))}
           
           {/* Final Download Card */}
-          <div className="bg-[#142614] p-10 flex flex-col items-center justify-center text-center gap-10 text-white group cursor-pointer relative overflow-hidden aspect-2/3 rounded-3xl">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-brand-accent/10 rounded-bl-full pointer-events-none" />
-            <div className="relative">
-               <div className="absolute inset-0 bg-brand-accent/20 blur-xl rounded-full" />
-               <Download size={48} className="text-brand-accent group-hover:scale-110 transition-transform relative z-10" />
-            </div>
-            <div className="flex flex-col gap-6">
-              <h4 className="text-2xl font-serif uppercase tracking-widest leading-tight">PROGRAMA <br /> COMPLETO 2026</h4>
-              <p className="text-[12px] opacity-50 uppercase tracking-[0.2em] leading-relaxed max-w-[200px]">Descarga el itinerario detallado con hoteles premium y experiencias exclusivas</p>
-            </div>
-            <div className="mt-8 flex flex-col items-center gap-2">
-              <span className="text-[10px] font-bold tracking-widest opacity-40 uppercase">PDF Disponible</span>
-              <ArrowDown size={24} className="animate-bounce text-brand-accent" />
+          <div className="shrink-0 w-[85vw] sm:w-[400px] md:w-auto snap-center">
+            <div className="bg-brand-primary p-10 flex flex-col items-center justify-center text-center gap-10 text-white group cursor-pointer relative overflow-hidden aspect-2/3 rounded-3xl h-full border border-border-main/20">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-brand-text-light/10 rounded-bl-full pointer-events-none" />
+              <div className="relative">
+                 <div className="absolute inset-0 bg-brand-text-light/20 blur-xl rounded-full" />
+                 <Download size={48} className="text-brand-text-light group-hover:scale-110 transition-transform relative z-10" />
+              </div>
+              <div className="flex flex-col gap-6">
+                <h4 className="text-2xl font-serif font-extralight uppercase tracking-widest leading-tight">PROGRAMA <br /> COMPLETO 2026</h4>
+                <p className="text-[12px] opacity-70 font-light uppercase tracking-[0.2em] leading-relaxed max-w-[200px]">Descarga el itinerario detallado con hoteles premium y experiencias exclusivas</p>
+              </div>
+              <div className="mt-8 flex flex-col items-center gap-2">
+                <span className="text-[10px] font-extralight tracking-widest opacity-40 uppercase">PDF Disponible</span>
+                <ArrowDown size={24} className="animate-bounce text-brand-text-light" />
+              </div>
             </div>
           </div>
         </div>
@@ -200,7 +213,7 @@ const Itinerary = () => {
                     background: transparent;
                   }
                   .custom-scrollbar::-webkit-scrollbar-thumb {
-                    background: #B59D7C;
+                    background: var(--color-border-main);
                     border-radius: 10px;
                   }
                   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
