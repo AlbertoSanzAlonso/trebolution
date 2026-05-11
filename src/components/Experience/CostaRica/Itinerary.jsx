@@ -177,11 +177,12 @@ const Itinerary = () => {
             </div>
 
             {/* Close Button */}
+            {/* Close Button - Responsive Style */}
             <button
               onClick={() => setSelectedDay(null)}
-              className="absolute top-8 right-8 z-50 bg-white text-brand-primary p-3 rounded-full hover:bg-brand-primary hover:text-white transition-all duration-300 shadow-xl cursor-pointer border border-brand-primary/10"
+              className="absolute top-8 right-8 z-50 bg-white md:bg-transparent text-brand-primary md:text-white p-3 md:p-4 rounded-full transition-all duration-300 md:opacity-40 md:hover:opacity-100 md:shadow-none shadow-xl cursor-pointer border border-brand-primary/10 md:border-none"
             >
-              <X size={24} />
+              <X className="w-6 h-6 md:w-10 md:h-10" strokeWidth={1} />
             </button>
 
             {/* Navigation Arrows - Desktop Only Version */}
@@ -268,7 +269,7 @@ const Itinerary = () => {
                 </p>
 
                 {/* Mobile-only Navigation Buttons (In-flow) */}
-                <div className="flex md:hidden items-center justify-between mt-0 py-1 border-y border-brand-primary/5">
+                <div className="flex md:hidden items-center justify-between mt-0 py-1">
                   <button
                     onClick={(e) => { e.stopPropagation(); handlePrev(); }}
                     disabled={currentIndex === 0}

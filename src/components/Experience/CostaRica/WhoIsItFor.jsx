@@ -9,6 +9,10 @@ const WhoIsItFor = () => {
           
           {/* Positive Section - Premium Navy */}
           <div className="flex flex-col gap-12 p-12 md:p-16 bg-[#00132C] rounded-4xl shadow-2xl relative overflow-hidden">
+            {/* Navy Section Watermark (White) */}
+            <div className="absolute -bottom-24 -right-24 w-64 h-64 opacity-[0.1] pointer-events-none rotate-12 z-0">
+              <img src="/Trebol_2.svg" alt="" className="w-full h-full object-contain brightness-0 invert" />
+            </div>
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-full" />
             
             <h3 className="text-3xl md:text-5xl font-serif text-white leading-tight relative z-10">
@@ -47,7 +51,16 @@ const WhoIsItFor = () => {
           </div>
 
           {/* Negative Section - Elegant Cream */}
-          <div className="flex flex-col gap-12 p-12 md:p-16 bg-[#F8F5F0] rounded-4xl border border-[#00132C]/5 shadow-xl">
+          <div className="flex flex-col gap-12 p-12 md:p-16 bg-[#F8F5F0] rounded-4xl border border-[#00132C]/5 shadow-xl relative overflow-hidden">
+            {/* Cream Section Watermark (Light Blue) */}
+            <div className="absolute -bottom-24 -right-24 w-64 h-64 opacity-[0.08] pointer-events-none rotate-12 z-0">
+              <img 
+                src="/Trebol_2.svg" 
+                alt="" 
+                className="w-full h-full object-contain" 
+                style={{ filter: 'invert(82%) sepia(15%) saturate(357%) hue-rotate(164deg) brightness(96%) contrast(92%)' }}
+              />
+            </div>
             <h3 className="text-3xl md:text-5xl font-serif text-[#00132C] leading-tight">
               Este viaje <br />
               <span className="italic text-[#00132C]/40 font-light">no es para ti si...</span>

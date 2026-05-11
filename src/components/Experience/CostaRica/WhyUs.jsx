@@ -49,18 +49,18 @@ const WhyUs = () => {
               text: "Viajar con respeto, apoyar economías locales y generar una huella positiva en cada paso."
             }
           ].map((item, i) => (
-            <div key={i} className="flex flex-col gap-8 bg-[#A68C6B] p-10 rounded-[2.5rem] shadow-xl relative overflow-hidden">
-              <div className="absolute -right-12 -bottom-12 w-48 h-48 opacity-10 pointer-events-none rotate-12">
+            <div key={i} className="flex flex-col gap-8 bg-gradient-to-br from-[#BFAE96] via-[#A68C6B] to-[#8E7656] p-10 rounded-[2.5rem] shadow-2xl relative overflow-hidden border border-white/30 group hover:scale-[1.02] transition-transform duration-500">
+              <div className="absolute -right-12 -bottom-12 w-48 h-48 opacity-10 pointer-events-none rotate-12 group-hover:rotate-45 transition-transform duration-700">
                 <img src="/Trebol_2.svg" alt="" className="w-full h-full object-contain brightness-0" />
               </div>
-              <span className="text-brand-secondary font-serif text-5xl font-extralight opacity-30">
+              <span className="text-brand-secondary font-serif text-5xl font-extralight opacity-40">
                 {item.num}
               </span>
               <div className="flex flex-col gap-4">
                 <h4 className="text-brand-primary text-lg font-bold tracking-widest uppercase leading-tight">
                   {item.title}
                 </h4>
-                <p className="text-brand-primary/70 text-[13px] leading-relaxed font-light">
+                <p className="text-brand-primary/80 text-[13px] leading-relaxed font-light">
                   {item.text}
                 </p>
               </div>
@@ -73,7 +73,16 @@ const WhyUs = () => {
       <div className="max-w-[1400px] mx-auto bg-white rounded-[3rem] shadow-2xl overflow-hidden mt-10">
         <div className="grid lg:grid-cols-2 min-h-[600px]">
           {/* Main Message */}
-          <div className="flex flex-col gap-6 relative z-10 p-12 md:p-20 justify-center">
+          <div className="flex flex-col gap-6 relative z-10 p-12 md:p-20 justify-center overflow-hidden">
+            {/* Light Blue Watermark */}
+            <div className="absolute -bottom-32 -left-32 w-[600px] h-[600px] opacity-[0.07] pointer-events-none -rotate-12 z-0">
+              <img 
+                src="/Trebol_2.svg" 
+                alt="" 
+                className="w-full h-full object-contain" 
+                style={{ filter: 'invert(82%) sepia(15%) saturate(357%) hue-rotate(164deg) brightness(96%) contrast(92%)' }} 
+              />
+            </div>
             <span className="text-brand-secondary text-[10px] font-bold tracking-[0.4em] uppercase">LA DIFERENCIA TREBOLUTION</span>
             <h2 className="text-3xl md:text-6xl font-serif leading-tight text-brand-primary uppercase tracking-tighter">
               Te acompañamos <br />
