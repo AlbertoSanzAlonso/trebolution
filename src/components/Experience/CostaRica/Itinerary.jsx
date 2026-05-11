@@ -122,115 +122,96 @@ const Itinerary = () => {
         </div>
       </div>
 
-      {/* PREMIUM MODAL */}
-      <AnimatePresence>
-        {selectedDay && (
-          <div className="fixed inset-0 z-100 flex items-center justify-center p-6 md:p-12">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedDay(null)}
-              className="absolute inset-0 bg-brand-primary/95 backdrop-blur-md"
-            />
+      {/* PREMIUM MODAL - Instant loading for performance */}
+      {selectedDay && (
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-6 md:p-12">
+          {/* Backdrop - No animation, no blur for maximum speed */}
+          <div
+            onClick={() => setSelectedDay(null)}
+            className="absolute inset-0 bg-brand-primary/95"
+          />
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="w-full max-w-6xl h-full max-h-[90vh] rounded-4xl overflow-hidden shadow-2xl relative z-10 flex flex-col md:flex-row bg-brand-primary"
-            >
-              {/* Full Background Image */}
-              <div className="absolute inset-0 z-0">
-                <img
-                  src={selectedDay.img}
-                  alt={selectedDay.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/20" />
-                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent md:bg-linear-to-r md:from-black/80 md:via-black/20 md:to-transparent" />
-              </div>
+          {/* Modal Container - Instant appearance */}
+          <div
+            className="w-full max-w-6xl h-full max-h-[90vh] rounded-4xl overflow-hidden shadow-2xl relative z-10 flex flex-col md:flex-row bg-brand-primary"
+          >
+            {/* Full Background Image */}
+            <div className="absolute inset-0 z-0">
+              <img
+                src={selectedDay.img}
+                alt={selectedDay.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/20" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent md:bg-linear-to-r md:from-black/80 md:via-black/20 md:to-transparent" />
+            </div>
 
-              {/* THE PETAL BLOCK WITH MASKED DAY NUMBER */}
-              <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden" style={{ mixBlendMode: 'screen' }}>
-                <div
-                  className="absolute bottom-[10%] right-[-5%] w-[150px] h-[150px]"
-                  style={{
-                    filter: 'drop-shadow(-30px -30px 70px rgba(0,0,0,0.25))',
-                    transform: 'translate(10%, 10%) rotate(-40deg) scale(12)',
-                    transformOrigin: 'center'
-                  }}
-                >
-                  <div
-                    className="w-full h-full relative overflow-hidden"
-                    style={{
-                      clipPath: 'path("M 50,100 C 50,100 0,60 0,35 C 0,15 15,0 35,0 C 45,0 50,10 50,10 C 50,10 55,0 65,0 C 85,0 100,15 100,35 C 100,60 50,100 50,100 Z")',
-                      background: 'rgba(255, 255, 255, 0.88)',
-                    }}
-                  />
-                </div>
-
-                {/* Day Number Mask (Black text on Screen blend mode creates transparency) */}
-                <div className="absolute inset-0 p-12 md:p-20 flex flex-col justify-end">
-                  <div className="md:w-1/3">
-                    <span className="text-black text-[12px] font-bold tracking-[0.4em] uppercase block mb-4">COSTA RICA EXPERIENCE</span>
-                    <h3 className="text-6xl md:text-9xl font-serif leading-none text-black whitespace-nowrap">
-                      {selectedDay.day}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedDay(null)}
-                className="absolute top-8 right-8 z-50 bg-white text-brand-primary p-3 rounded-full hover:bg-brand-primary hover:text-white transition-all duration-300 shadow-xl cursor-pointer border border-brand-primary/10"
+            {/* THE PETAL BLOCK WITH MASKED DAY NUMBER */}
+            <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden" style={{ mixBlendMode: 'screen' }}>
+              <div
+                className="absolute bottom-[2%] right-[-5%] w-[150px] h-[150px]"
+                style={{
+                  filter: 'drop-shadow(-30px -30px 70px rgba(0,0,0,0.25))',
+                  transform: 'translate(10%, 10%) rotate(-40deg) scale(12)',
+                  transformOrigin: 'center'
+                }}
               >
-                <X size={24} />
-              </button>
-
-              {/* Navigation Arrows */}
-              <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 pointer-events-none z-40">
-                <button
-                  onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                  disabled={currentIndex === 0}
-                  className={`pointer-events-auto p-4 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === 0 ? 'opacity-0 scale-50' : 'opacity-40 hover:opacity-100 hover:bg-white/10 text-white'
-                    }`}
-                >
-                  <ChevronLeft size={48} strokeWidth={1} />
-                </button>
-                <button
-                  onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                  disabled={currentIndex === itineraryData.length - 1}
-                  className={`pointer-events-auto p-4 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === itineraryData.length - 1 ? 'opacity-0 scale-50' : 'opacity-40 hover:opacity-100 hover:bg-white/10 text-brand-primary'
-                    }`}
-                >
-                  <ChevronRight size={48} strokeWidth={1} />
-                </button>
+                <div
+                  className="w-full h-full relative overflow-hidden"
+                  style={{
+                    clipPath: 'path("M 50,100 C 50,100 0,60 0,35 C 0,15 15,0 35,0 C 45,0 50,10 50,10 C 50,10 55,0 65,0 C 85,0 100,15 100,35 C 100,60 50,100 50,100 Z")',
+                    background: 'rgba(255, 255, 255, 0.88)',
+                  }}
+                />
               </div>
 
-              {/* UI Overlay / Left Column - Absolute on mobile to float over image, relative on desktop to maintain column */}
-              <div className="absolute md:relative inset-0 md:inset-auto z-50 w-full md:w-1/3 h-full p-8 md:p-20 flex flex-col justify-between pointer-events-none">
-                {/* Date and Location over the image background */}
-                <div className="flex flex-col gap-1 md:gap-4 items-end md:items-start">
-                  <div className="flex items-center gap-2 md:gap-3 text-white/80">
-                    <Calendar size={12} className="text-brand-accent md:w-[16px] md:h-[16px]" />
-                    <span className="text-[8px] md:text-[11px] font-bold tracking-[0.3em] uppercase">{selectedDay.date}</span>
-                  </div>
-                  <div className="flex items-center gap-2 md:gap-3 text-white/80">
-                    <MapPin size={12} className="text-brand-accent md:w-[16px] md:h-[16px]" />
-                    <span className="text-[8px] md:text-[11px] font-bold tracking-[0.3em] uppercase">{selectedDay.location}</span>
-                  </div>
+              {/* Day Number Mask (Black text on Screen blend mode creates transparency) */}
+              <div className="absolute inset-0 p-12 md:p-20 pb-10 md:pb-20 flex flex-col justify-end">
+                <div className="md:w-1/3">
+                  <span className="text-black text-[12px] font-bold tracking-[0.4em] uppercase block mb-4">COSTA RICA EXPERIENCE</span>
+                  <h3 className="text-6xl md:text-9xl font-serif leading-none text-black whitespace-nowrap">
+                    {selectedDay.day}
+                  </h3>
                 </div>
-
-                {/* Empty space to let the mask effect from z-20 layer show through */}
-                <div className="h-40" />
               </div>
+            </div>
 
-              {/* Content Side with Custom Scrollbar */}
-              <div className="relative z-30 w-full md:w-2/3 flex flex-col overflow-y-auto custom-scrollbar">
-                <style>{`
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedDay(null)}
+              className="absolute top-8 right-8 z-50 bg-white text-brand-primary p-3 rounded-full hover:bg-brand-primary hover:text-white transition-all duration-300 shadow-xl cursor-pointer border border-brand-primary/10"
+            >
+              <X size={24} />
+            </button>
+
+            {/* Navigation Arrows */}
+            <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 pointer-events-none z-40">
+              <button
+                onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                disabled={currentIndex === 0}
+                className={`pointer-events-auto p-4 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === 0 ? 'opacity-0 scale-50' : 'opacity-40 hover:opacity-100 hover:bg-white/10 text-white'
+                  }`}
+              >
+                <ChevronLeft size={48} strokeWidth={1} />
+              </button>
+              <button
+                onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                disabled={currentIndex === itineraryData.length - 1}
+                className={`pointer-events-auto p-4 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === itineraryData.length - 1 ? 'opacity-0 scale-50' : 'opacity-40 hover:opacity-100 hover:bg-white/10 text-brand-primary'
+                  }`}
+              >
+                <ChevronRight size={48} strokeWidth={1} />
+              </button>
+            </div>
+
+            {/* Empty space for top UI on desktop */}
+            <div className="hidden md:flex absolute md:relative inset-0 md:inset-auto z-50 w-full md:w-1/3 h-full p-8 md:p-20 flex-col justify-between pointer-events-none">
+              <div className="h-40" />
+            </div>
+
+            {/* Content Side with Custom Scrollbar */}
+            <div className="relative z-30 w-full md:w-2/3 h-full flex flex-col overflow-y-auto custom-scrollbar">
+              <style>{`
                   .custom-scrollbar::-webkit-scrollbar {
                     width: 4px;
                   }
@@ -253,34 +234,44 @@ const Itinerary = () => {
                     color: #00132C;
                   }
                 `}</style>
-                <div className="p-8 md:p-24 pt-32 pb-64 md:pt-24 md:pb-20 min-h-full flex flex-col justify-end gap-5 md:gap-10 relative">
-                  <div className="flex flex-col gap-3 md:gap-6">
-                    <h2 className="text-2xl md:text-5xl font-serif text-brand-primary leading-tight max-w-[90%]">
-                      {selectedDay.title}
-                    </h2>
-                    <div className="w-20 h-1 bg-brand-accent/30" />
-                  </div>
-
-                  <p className="text-sm md:text-xl text-brand-primary/70 font-light leading-relaxed">
-                    {selectedDay.desc}
-                  </p>
-
-                  <div className="mt-4 md:mt-8 p-3 md:p-8 bg-brand-secondary/30 rounded-2xl flex items-center gap-3 md:gap-6 border border-brand-primary/5">
-                    <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-white shadow-xl flex items-center justify-center text-brand-primary shrink-0">
-                      <Building2 className="w-4 h-4 md:w-7 md:h-7" />
+              <div className="p-8 md:p-24 pt-32 pb-40 md:pt-24 md:pb-20 min-h-full flex flex-col justify-end gap-5 md:gap-10 relative">
+                <div className="flex flex-col gap-3 md:gap-6">
+                  {/* Mobile/Desktop Date and Location in Blue (Stacked) */}
+                  <div className="flex flex-col gap-1 md:gap-2 mb-2">
+                    <div className="flex items-center gap-2 text-brand-primary/60">
+                      <Calendar size={14} className="text-brand-primary" />
+                      <span className="text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase">{selectedDay.date}</span>
                     </div>
-                    <div className="flex flex-col">
-                      <span className="text-[8px] md:text-[10px] font-bold text-brand-primary/30 uppercase tracking-[0.3em] mb-0.5 md:mb-1">Alojamiento seleccionado</span>
-                      <span className="text-base md:text-xl font-medium text-brand-primary">{selectedDay.hotel}</span>
+                    <div className="flex items-center gap-2 text-brand-primary/60">
+                      <MapPin size={14} className="text-brand-primary" />
+                      <span className="text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase">{selectedDay.location}</span>
                     </div>
                   </div>
-
+                  <h2 className="text-2xl md:text-5xl font-serif text-brand-primary leading-tight max-w-[90%]">
+                    {selectedDay.title}
+                  </h2>
+                  <div className="w-20 h-1 bg-brand-accent/30" />
                 </div>
+
+                <p className="text-sm md:text-xl text-brand-primary/70 font-light leading-relaxed">
+                  {selectedDay.desc}
+                </p>
+
+                <div className="mt-4 md:mt-8 p-3 md:p-8 bg-brand-secondary/30 rounded-2xl flex items-center gap-3 md:gap-6 border border-brand-primary/5">
+                  <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-white shadow-xl flex items-center justify-center text-brand-primary shrink-0">
+                    <Building2 className="w-4 h-4 md:w-7 md:h-7" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[8px] md:text-[10px] font-bold text-brand-primary/30 uppercase tracking-[0.3em] mb-0.5 md:mb-1">Alojamiento seleccionado</span>
+                    <span className="text-base md:text-xl font-medium text-brand-primary">{selectedDay.hotel}</span>
+                  </div>
+                </div>
+
               </div>
-            </motion.div>
+            </div>
           </div>
-        )}
-      </AnimatePresence>
+        </div>
+      )}
     </section>
   );
 };

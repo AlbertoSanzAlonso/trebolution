@@ -59,7 +59,7 @@ const ExperiencePage = () => {
             <h4 className="text-[11px] font-sans font-bold tracking-[0.5em] uppercase text-brand-accent">
               {experience.sectionSubtitle}
             </h4>
-            <h2 className="text-[3.8rem] md:text-[5.5rem] font-serif font-normal text-brand-primary leading-[1] uppercase">
+            <h2 className="text-[3.8rem] md:text-[5.5rem] font-serif font-normal text-brand-primary leading-none uppercase">
               {experience.sectionTitle}
             </h2>
           </div>
