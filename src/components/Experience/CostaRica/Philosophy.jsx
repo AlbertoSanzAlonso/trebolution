@@ -21,7 +21,7 @@ const Philosophy = () => {
                 <span className="text-brand-primary text-[11px] font-bold tracking-[0.4em] uppercase">
                   Filosofía trebolera
                 </span>
-                <h2 className="text-5xl md:text-7xl font-serif leading-[1.1] text-brand-primary">
+                <h2 className="text-4xl md:text-7xl font-serif leading-[1.1] text-brand-primary uppercase tracking-tighter">
                   No organizamos viajes. <br />
                   <span className="italic font-light">Creamos experiencias que permanecen.</span>
                 </h2>
@@ -63,7 +63,7 @@ const Philosophy = () => {
                   transition={{ delay: 0.5, duration: 1 }}
                   className="text-center"
                 >
-                  <h3 className="text-white text-4xl md:text-6xl font-serif leading-tight lowercase tracking-tight">
+                  <h3 className="text-white text-3xl md:text-6xl font-serif leading-tight lowercase tracking-tight">
                     <span className="block italic opacity-90">diseñamos</span>
                     <span className="block font-light">lo que vivimos</span>
                   </h3>

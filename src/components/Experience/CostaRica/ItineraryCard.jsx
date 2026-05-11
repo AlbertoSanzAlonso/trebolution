@@ -37,6 +37,7 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
   const { contextSafe } = useGSAP({ scope: containerRef });
 
   const onMouseEnter = contextSafe(() => {
+    if (window.innerWidth < 768) return;
     // Center Text block vertically
     gsap.to(contentRef.current, {
       y: "-35%",
@@ -132,6 +133,7 @@ const ItineraryCard = ({ day, date, location, title, desc, hotel, img, onClick }
   });
 
   const onMouseLeave = contextSafe(() => {
+    if (window.innerWidth < 768) return;
     // Reset Text block vertically
     gsap.to(contentRef.current, {
       y: "0%",

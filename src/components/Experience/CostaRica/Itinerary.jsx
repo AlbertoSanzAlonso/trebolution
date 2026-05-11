@@ -135,10 +135,10 @@ const Itinerary = () => {
             />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               className="w-full max-w-6xl h-full max-h-[90vh] rounded-4xl overflow-hidden shadow-2xl relative z-10 flex flex-col md:flex-row bg-brand-primary"
             >
               {/* Full Background Image */}
@@ -253,15 +253,15 @@ const Itinerary = () => {
                     color: #00132C;
                   }
                 `}</style>
-                <div className="p-8 md:p-24 pt-44 pb-48 md:pt-24 md:pb-20 min-h-full flex flex-col justify-end gap-5 md:gap-10 relative">
+                <div className="p-8 md:p-24 pt-32 pb-64 md:pt-24 md:pb-20 min-h-full flex flex-col justify-end gap-5 md:gap-10 relative">
                   <div className="flex flex-col gap-3 md:gap-6">
-                    <h2 className="text-3xl md:text-5xl font-serif text-brand-primary leading-tight max-w-[90%]">
+                    <h2 className="text-2xl md:text-5xl font-serif text-brand-primary leading-tight max-w-[90%]">
                       {selectedDay.title}
                     </h2>
                     <div className="w-20 h-1 bg-brand-accent/30" />
                   </div>
 
-                  <p className="text-lg md:text-xl text-brand-primary/70 font-light leading-relaxed">
+                  <p className="text-sm md:text-xl text-brand-primary/70 font-light leading-relaxed">
                     {selectedDay.desc}
                   </p>
 

@@ -75,7 +75,7 @@ const WhyUs = () => {
           {/* Main Message */}
           <div className="flex flex-col gap-6 relative z-10 p-12 md:p-20 justify-center">
             <span className="text-brand-secondary text-[10px] font-bold tracking-[0.4em] uppercase">LA DIFERENCIA TREBOLUTION</span>
-            <h2 className="text-4xl md:text-6xl font-serif leading-tight text-brand-primary">
+            <h2 className="text-3xl md:text-6xl font-serif leading-tight text-brand-primary uppercase tracking-tighter">
               Te acompañamos <br />
               <span className="italic font-light">en todo momento</span>
             </h2>
