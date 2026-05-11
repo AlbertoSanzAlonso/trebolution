@@ -166,7 +166,7 @@ const Itinerary = () => {
               </div>
 
               {/* Day Number Mask (Black text on Screen blend mode creates transparency) */}
-              <div className="absolute inset-0 p-12 md:p-20 pb-10 md:pb-20 flex flex-col justify-end">
+              <div className="absolute inset-0 p-12 md:p-20 pb-6 md:pb-20 flex flex-col justify-end">
                 <div className="md:w-1/3">
                   <span className="text-black text-[12px] font-bold tracking-[0.4em] uppercase block mb-4">COSTA RICA EXPERIENCE</span>
                   <h3 className="text-6xl md:text-9xl font-serif leading-none text-black whitespace-nowrap">
@@ -184,28 +184,38 @@ const Itinerary = () => {
               <X size={24} />
             </button>
 
-            {/* Navigation Arrows */}
-            <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 pointer-events-none z-40">
+            {/* Navigation Arrows - Desktop Only Version */}
+            <div className="hidden md:flex absolute inset-y-0 left-0 right-0 items-center justify-between px-4 pointer-events-none z-50">
               <button
                 onClick={(e) => { e.stopPropagation(); handlePrev(); }}
                 disabled={currentIndex === 0}
-                className={`pointer-events-auto p-4 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === 0 ? 'opacity-0 scale-50' : 'opacity-40 hover:opacity-100 hover:bg-white/10 text-white'
+                className={`pointer-events-auto w-auto h-auto p-4 flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${currentIndex === 0 ? 'opacity-0 scale-50' : 'bg-transparent text-white opacity-40 hover:opacity-100'
                   }`}
               >
-                <ChevronLeft size={48} strokeWidth={1} />
+                <ChevronLeft className="w-14 h-14" strokeWidth={1} />
               </button>
               <button
                 onClick={(e) => { e.stopPropagation(); handleNext(); }}
                 disabled={currentIndex === itineraryData.length - 1}
-                className={`pointer-events-auto p-4 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === itineraryData.length - 1 ? 'opacity-0 scale-50' : 'opacity-40 hover:opacity-100 hover:bg-white/10 text-brand-primary'
+                className={`pointer-events-auto w-auto h-auto p-4 flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${currentIndex === itineraryData.length - 1 ? 'opacity-0 scale-50' : 'bg-transparent text-brand-primary opacity-40 hover:opacity-100'
                   }`}
               >
-                <ChevronRight size={48} strokeWidth={1} />
+                <ChevronRight className="w-14 h-14" strokeWidth={1} />
               </button>
             </div>
 
-            {/* Empty space for top UI on desktop */}
+            {/* UI Overlay / Left Column - Desktop Only Version */}
             <div className="hidden md:flex absolute md:relative inset-0 md:inset-auto z-50 w-full md:w-1/3 h-full p-8 md:p-20 flex-col justify-between pointer-events-none">
+              <div className="flex flex-col gap-4 items-start">
+                <div className="flex items-center gap-3 text-white/80">
+                  <Calendar size={16} className="text-brand-accent" />
+                  <span className="text-[11px] font-bold tracking-[0.3em] uppercase">{selectedDay.date}</span>
+                </div>
+                <div className="flex items-center gap-3 text-white/80">
+                  <MapPin size={16} className="text-brand-accent" />
+                  <span className="text-[11px] font-bold tracking-[0.3em] uppercase">{selectedDay.location}</span>
+                </div>
+              </div>
               <div className="h-40" />
             </div>
 
@@ -236,15 +246,15 @@ const Itinerary = () => {
                 `}</style>
               <div className="p-8 md:p-24 pt-32 pb-40 md:pt-24 md:pb-20 min-h-full flex flex-col justify-end gap-5 md:gap-10 relative">
                 <div className="flex flex-col gap-3 md:gap-6">
-                  {/* Mobile/Desktop Date and Location in Blue (Stacked) */}
-                  <div className="flex flex-col gap-1 md:gap-2 mb-2">
+                  {/* Mobile Only Date and Location (Hidden on Desktop) */}
+                  <div className="flex md:hidden flex-col gap-1 mb-2">
                     <div className="flex items-center gap-2 text-brand-primary/60">
                       <Calendar size={14} className="text-brand-primary" />
-                      <span className="text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase">{selectedDay.date}</span>
+                      <span className="text-[10px] font-bold tracking-[0.2em] uppercase">{selectedDay.date}</span>
                     </div>
                     <div className="flex items-center gap-2 text-brand-primary/60">
                       <MapPin size={14} className="text-brand-primary" />
-                      <span className="text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase">{selectedDay.location}</span>
+                      <span className="text-[10px] font-bold tracking-[0.2em] uppercase">{selectedDay.location}</span>
                     </div>
                   </div>
                   <h2 className="text-2xl md:text-5xl font-serif text-brand-primary leading-tight max-w-[90%]">
@@ -253,11 +263,32 @@ const Itinerary = () => {
                   <div className="w-20 h-1 bg-brand-accent/30" />
                 </div>
 
-                <p className="text-sm md:text-xl text-brand-primary/70 font-light leading-relaxed">
+                <p className="text-sm md:text-xl text-brand-primary/70 font-light leading-relaxed max-w-[88%] md:max-w-none">
                   {selectedDay.desc}
                 </p>
 
-                <div className="mt-4 md:mt-8 p-3 md:p-8 bg-brand-secondary/30 rounded-2xl flex items-center gap-3 md:gap-6 border border-brand-primary/5">
+                {/* Mobile-only Navigation Buttons (In-flow) */}
+                <div className="flex md:hidden items-center justify-between mt-0 py-1 border-y border-brand-primary/5">
+                  <button
+                    onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                    disabled={currentIndex === 0}
+                    className={`flex items-center gap-2 text-brand-primary transition-all duration-300 ${currentIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+                  >
+                    <ChevronLeft size={18} />
+                    <span className="text-[10px] font-bold tracking-widest uppercase">Anterior</span>
+                  </button>
+
+                  <button
+                    onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                    disabled={currentIndex === itineraryData.length - 1}
+                    className={`flex items-center gap-2 text-brand-primary transition-all duration-300 ${currentIndex === itineraryData.length - 1 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+                  >
+                    <span className="text-[10px] font-bold tracking-widest uppercase">Siguiente</span>
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+
+                <div className="mt-1 md:mt-8 p-3 md:p-8 bg-brand-secondary/30 rounded-2xl flex items-center gap-3 md:gap-6 border border-brand-primary/5">
                   <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-white shadow-xl flex items-center justify-center text-brand-primary shrink-0">
                     <Building2 className="w-4 h-4 md:w-7 md:h-7" />
                   </div>
