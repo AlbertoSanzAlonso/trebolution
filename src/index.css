@@ -19,6 +19,16 @@
   --font-weight-light: 300;
 }
 
+/* FUERZA BRUTA: Selección de texto en Oro Trebolution */
+*::selection {
+  background-color: #A68C6B !important;
+  color: #001135 !important;
+}
+*::-moz-selection {
+  background-color: #A68C6B !important;
+  color: #001135 !important;
+}
+
 @layer base {
   body {
     background-color: var(--color-brand-accent);

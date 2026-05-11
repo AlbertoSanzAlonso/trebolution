@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { Download, Loader2 } from 'lucide-react';
+import { ChevronRight, Loader2 } from 'lucide-react';
 import DossierTemplate from './DossierTemplate';
 
 const DossierDownloadButton = ({ data }) => {
@@ -63,9 +63,9 @@ const DossierDownloadButton = ({ data }) => {
         <div className="absolute inset-0 bg-brand-primary translate-y-full transition-transform duration-500 group-hover:translate-y-0" />
         <span className="relative z-10 flex items-center justify-center gap-3 transition-colors group-hover:text-white">
           {isGenerating ? (
-            <>GENERANDO DOSSIER... <Loader2 className="animate-spin" size={14} /></>
+            <>PROCESANDO SOLICITUD... <Loader2 className="animate-spin" size={14} /></>
           ) : (
-            <>DESCARGAR DOSSIER PDF <Download size={14} className="transition-transform group-hover:-translate-y-1" /></>
+            <>SOLICITAR EXPERIENCIA <ChevronRight size={14} className="transition-transform group-hover:translate-x-1" /></>
           )}
         </span>
       </button>

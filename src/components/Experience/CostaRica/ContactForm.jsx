@@ -56,7 +56,7 @@ const ContactForm = () => {
   ];
 
   return (
-    <section className="py-40 px-6 md:px-24 bg-brand-primary relative overflow-hidden">
+    <section id="contact" className="py-40 px-6 md:px-24 bg-brand-primary relative overflow-hidden">
       <div className="absolute left-0 bottom-0 w-full h-1/2 bg-linear-to-t from-brand-accent/5 to-transparent pointer-events-none" />
       
       <div className="max-w-[1400px] mx-auto relative z-10">
@@ -68,7 +68,7 @@ const ContactForm = () => {
               className="text-6xl md:text-[6.5rem] font-serif text-white leading-[0.95] tracking-tighter"
             >
               Si sientes que <br />
-              este viaje es para ti, <br />
+              este viaje es <span className="text-[#A68C6B]">para ti</span>, <br />
               <span className="italic text-brand-accent font-extralight text-5xl md:text-[5rem]">lo hablamos.</span>
             </motion.h2>
             <p className="text-xl text-white/40 font-serif font-extralight max-w-md leading-relaxed uppercase tracking-widest">
@@ -85,7 +85,7 @@ const ContactForm = () => {
             {/* Progress bar */}
             <div className="w-full h-1 bg-gray-100 mb-12 relative overflow-hidden">
               <motion.div 
-                className="absolute top-0 left-0 h-full bg-brand-blue"
+                className="absolute top-0 left-0 h-full bg-[#A68C6B]"
                 initial={{ width: "0%" }}
                 animate={{ width: `${(step / 4) * 100}%` }}
               />
@@ -120,8 +120,8 @@ const ContactForm = () => {
                             className="w-full h-full object-contain brightness-0 invert"
                           />
                         </div>
-                        <span className="text-xs font-bold text-brand-primary tracking-[0.25em] uppercase mb-1.5 transition-colors group-hover:text-white transition-all duration-200">{opt.label}</span>
-                        <span className="text-[11px] text-gray-400 uppercase font-serif font-extralight tracking-widest leading-relaxed transition-colors group-hover:text-white/80 transition-all duration-200">{opt.sub}</span>
+                        <span className="text-xs font-bold text-brand-primary tracking-[0.25em] uppercase mb-1.5 group-hover:text-white transition-all duration-200">{opt.label}</span>
+                        <span className="text-[11px] text-gray-400 uppercase font-serif font-extralight tracking-widest leading-relaxed group-hover:text-white/80 transition-all duration-200">{opt.sub}</span>
                         <motion.div 
                           className="absolute right-8 top-1/2 -translate-y-1/2 text-gray-200 group-hover:text-white"
                           initial={{ x: 0 }}

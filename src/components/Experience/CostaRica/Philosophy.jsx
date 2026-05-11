@@ -46,13 +46,13 @@ const Philosophy = () => {
             transition={{ duration: 1.2 }}
             className="relative order-1 lg:order-2"
           >
-            <div className="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-3xl relative group">
+            <div className="aspect-4/5 rounded-4xl overflow-hidden shadow-3xl relative">
               <img 
                 src={philosophyBg} 
                 alt="Filosofía Trebolera" 
-                className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-brand-primary/10 group-hover:bg-transparent transition-colors duration-700" />
+              <div className="absolute inset-0 bg-brand-primary/10" />
               
               {/* Slogan Overlay */}
               <div className="absolute inset-0 flex items-center justify-center p-12">

@@ -1,27 +1,26 @@
-import React from 'react';
 import { Heart, Utensils, Sprout, Globe } from 'lucide-react';
 
 const Features = () => {
   const features = [
-    { 
-      icon: <Heart className="w-8 h-8" strokeWidth={1.5} />, 
-      title: "Atractivo turístico", 
-      desc: "Seleccionamos cada experiencia para que tenga sentido, autenticidad y coherencia." 
+    {
+      icon: <Heart className="w-8 h-8" strokeWidth={1.5} />,
+      title: "Atractivo turístico",
+      desc: "Seleccionamos cada experiencia para que tenga sentido, autenticidad y coherencia."
     },
-    { 
-      icon: <Utensils className="w-8 h-8" strokeWidth={1.5} />, 
-      title: "Gastronomía", 
-      desc: "Seleccionamos cada experiencia para que tenga sentido, autenticidad y coherencia." 
+    {
+      icon: <Utensils className="w-8 h-8" strokeWidth={1.5} />,
+      title: "Gastronomía",
+      desc: "Seleccionamos cada experiencia para que tenga sentido, autenticidad y coherencia."
     },
-    { 
-      icon: <Sprout className="w-8 h-8" strokeWidth={1.5} />, 
-      title: "Desarrollo personal", 
-      desc: "Seleccionamos cada experiencia para que tenga sentido, autenticidad y coherencia." 
+    {
+      icon: <Sprout className="w-8 h-8" strokeWidth={1.5} />,
+      title: "Desarrollo personal",
+      desc: "Seleccionamos cada experiencia para que tenga sentido, autenticidad y coherencia."
     },
-    { 
-      icon: <Globe className="w-8 h-8" strokeWidth={1.5} />, 
-      title: "Sostenibilidad", 
-      desc: "Seleccionamos cada experiencia para que tenga sentido, autenticidad y coherencia." 
+    {
+      icon: <Globe className="w-8 h-8" strokeWidth={1.5} />,
+      title: "Sostenibilidad",
+      desc: "Seleccionamos cada experiencia para que tenga sentido, autenticidad y coherencia."
     },
   ];
 

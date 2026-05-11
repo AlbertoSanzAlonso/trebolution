@@ -14,7 +14,7 @@ const CostaRicaPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-brand-secondary font-sans selection:bg-brand-accent selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-brand-secondary font-sans overflow-x-hidden">
       <Navbar />
       <Hero />
       <Philosophy />
