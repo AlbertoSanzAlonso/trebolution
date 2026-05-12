@@ -7,14 +7,14 @@
   --color-brand-blue: #0090D4;
   --color-brand-text: #002149;
   --color-brand-text-light: #E9F6FC;
-  
+
   --color-border-main: #0090D4;
   --color-border-2: #E9F6FC;
   --color-border-light: #F8FCFE;
 
   --font-serif: "Antic Didone", serif;
   --font-sans: "Poppins", sans-serif;
-  
+
   --font-weight-extralight: 200;
   --font-weight-light: 300;
 }
@@ -24,6 +24,7 @@
   background-color: #A68C6B !important;
   color: #001135 !important;
 }
+
 *::-moz-selection {
   background-color: #A68C6B !important;
   color: #001135 !important;
@@ -38,7 +39,12 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-serif);
     font-weight: 200;
     text-transform: uppercase;
@@ -63,6 +69,7 @@
     transition: transform 0.3s;
     z-index: 50;
   }
+
   .whatsapp-btn:hover {
     transform: scale(1.1);
   }
@@ -73,6 +80,49 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-border-main);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #A68C6B;
+}
+
+::selection {
+  background: #A68C6B;
+  color: #00132C;
+}
+
+::-moz-selection {
+  background: #A68C6B;
+  color: #00132C;
+}
+
+.custom-scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

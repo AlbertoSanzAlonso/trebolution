@@ -20,10 +20,10 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <span className="text-[13px] md:text-[15px] tracking-[0.4em] uppercase  block mb-6">
+          <span className="text-[13px] md:text-[20px] tracking-[0.4em] uppercase  block mb-6">
             Costa Rica Trebolution Experience
           </span>
-          <h1 className="text-4xl md:text-[7rem] font-serif leading-[0.85] mb-10 tracking-tighter uppercase">
+          <h1 className="text-4xl md:text-[6rem] font-serif leading-[0.85] mb-10 tracking-tighter uppercase">
             Pura vida <br /> <span className="italic font-light">en su máxima expresión</span>
           </h1>
           <p className="text-xl md:text-2xl max-w-2xl opacity-90 leading-relaxed mb-4 font-light italic">
@@ -32,20 +32,7 @@ const Hero = () => {
           <p className="text-lg md:text-xl max-w-3xl opacity-80 leading-relaxed mb-12 font-light">
             Una experiencia auténtica, consciente y transformadora, diseñada desde la vivencia real del destino y acompañada por Trebolution desde el primer momento.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6">
-            <button
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-brand-accent text-brand-primary px-12 py-6 text-xs font-extralight uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-xl rounded-full cursor-pointer"
-            >
-              Solicitar acceso a la experiencia
-            </button>
-            <button
-              onClick={() => document.getElementById('itinerary')?.scrollIntoView({ behavior: 'smooth' })}
-              className="border border-white/50 bg-white/10 backdrop-blur-sm text-white px-12 py-6 text-xs font-extralight uppercase tracking-[0.2em] hover:bg-white hover:text-brand-primary transition-all flex items-center gap-3 rounded-full cursor-pointer"
-            >
-              VER PROGRAMA COMPLETO
-            </button>
-          </div>
+
         </motion.div>
       </div>
 

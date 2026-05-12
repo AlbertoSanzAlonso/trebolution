@@ -4,7 +4,8 @@ import Hero from './Experience/CostaRica/Hero';
 import Philosophy from './Experience/CostaRica/Philosophy';
 import WhyUs from './Experience/CostaRica/WhyUs';
 import WhoIsItFor from './Experience/CostaRica/WhoIsItFor';
-import Itinerary from './Experience/CostaRica/Itinerary';
+// import Itinerary from './Experience/CostaRica/Itinerary';
+import Gallery from './Experience/CostaRica/Gallery';
 import ContactForm from './Experience/CostaRica/ContactForm';
 import CRFooter from './Experience/CostaRica/CRFooter';
 
@@ -20,7 +21,8 @@ const CostaRicaPage = () => {
       <Philosophy />
       <WhyUs />
       <WhoIsItFor />
-      <Itinerary />
+      {/* <Itinerary /> */}
+      <Gallery />
       <ContactForm />
       <CRFooter />
     </div>
