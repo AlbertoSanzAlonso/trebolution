@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, MapPin, Users, MessageCircle, ChevronRight, ArrowLeft, Check, X } from 'lucide-react';
+import { ChevronRight, ArrowLeft, Check, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import DossierDownloadButton from '../../Dossier/DossierDownloadButton';
 
@@ -14,13 +14,18 @@ const ContactForm = () => {
     email: '',
     phone: ''
   });
+  const [showFarewell, setShowFarewell] = useState(false);
 
   const nextStep = () => setStep(prev => prev + 1);
   const prevStep = () => setStep(prev => prev - 1);
 
   const handleOptionSelect = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-    nextStep();
+    if (field === 'budget' && value === 'NO') {
+      setShowFarewell(true);
+    } else {
+      nextStep();
+    }
   };
 
   const handleChange = (e) => {
@@ -50,26 +55,33 @@ const ContactForm = () => {
       ]
     },
     {
-      title: "Inversión estimada por persona",
-      subtitle: "La exclusividad requiere una curación sin compromisos.",
+      title: "¿Estarías dispuesto a invertir entre 3.000€ y 4.000€ en esta experiencia?",
+      subtitle: "Una inversión en lo que realmente importa.",
       field: "budget",
       options: [
-        { label: "3.500€ - 5.000€", sub: "Experiencia premium seleccionada." },
-        { label: "5.000€ - 8.000€", sub: "Lujo consciente y privado." },
-        { label: "MÁS DE 8.000€", sub: "Ultra-lujo y servicios a medida." }
+        { label: "SÍ", sub: "Estoy listo para vivir esta experiencia." },
+        { label: "NO", sub: "Aún estoy valorando mis opciones." }
       ]
     }
   ];
 
   return (
     <section id="contact" className="py-40 px-6 md:px-24 bg-brand-primary relative overflow-hidden">
-      <div className="absolute left-0 bottom-0 w-full h-1/2 bg-linear-to-t from-brand-accent/5 to-transparent pointer-events-none" />
-      
+      <div className="absolute inset-0 z-0 opacity-30">
+        <img 
+          src="/assets/images/costa-rica-hero.png" 
+          alt="" 
+          className="w-full h-full object-cover brightness-75 contrast-110"
+        />
+        <div className="absolute inset-0 bg-brand-primary/40 mix-blend-multiply" />
+      </div>
+      <div className="absolute left-0 bottom-0 w-full h-1/2 bg-linear-to-t from-brand-accent/5 to-transparent pointer-events-none z-1" />
+
       <div className="max-w-[1400px] mx-auto relative z-10">
         <div className="flex justify-center items-center min-h-[600px]">
           <AnimatePresence mode="wait">
             {!showForm ? (
-              <motion.div 
+              <motion.div
                 key="intro"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -78,27 +90,26 @@ const ContactForm = () => {
                 className="grid lg:grid-cols-2 gap-16 md:gap-32 items-center w-full"
               >
                 <div>
-                  <h2 className="text-6xl md:text-[6.5rem] font-serif text-white leading-[0.95] tracking-tighter text-left">
-                    Si sientes que <br />
-                    este viaje es <span className="text-[#A68C6B]">para ti</span>, <br />
-                    <span className="italic text-brand-accent font-extralight text-5xl md:text-[5rem]">lo hablamos.</span>
+                  <h2 className="text-blue-5xl md:text-[4rem] font-serif text-white leading-[0.95] tracking-tighter text-left">
+                    Hay viajes que <br />
+                    simplemente se recuerdan.<br />
+                    <span className="italic text-white/50">Y otros que cambian la forma <br />de viajar para siempre.</span>
                   </h2>
                 </div>
-                <div className="flex flex-col gap-10 items-start">
-                  <p className="text-xl text-white/40 font-serif font-extralight max-w-xl leading-relaxed uppercase tracking-widest text-left">
-                    Cuéntanos qué estás buscando y diseñaremos contigo una experiencia a medida, cuidada desde el primer detalle.
+                <div className="flex flex-col gap-8 items-start">
+                  <p className="text-xs font-sans font-light text-white/40 tracking-widest leading-relaxed uppercase max-w-sm">
+                    Solicita el dossier privado con el programa completo y descubre Costa Rica desde la mirada Trebolution.
                   </p>
-                  
                   <button
                     onClick={() => setShowForm(true)}
-                    className="bg-[#A68C6B] text-[#00132C] px-12 py-6 text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 shadow-2xl rounded-full cursor-pointer"
+                    className="bg-white text-[#00132C] px-12 py-6 text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-[#A68C6B] hover:text-white transition-all duration-500 shadow-2xl rounded-full cursor-pointer"
                   >
                     Solicitar acceso a la experiencia
                   </button>
                 </div>
               </motion.div>
             ) : (
-              <motion.div 
+              <motion.div
                 key="form"
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
@@ -107,8 +118,12 @@ const ContactForm = () => {
                 className="w-full max-w-3xl"
               >
                 <div className="bg-white p-8 md:p-16 shadow-[0_40px_120px_rgba(0,0,0,0.5)] w-full relative flex flex-col rounded-3xl overflow-hidden min-h-[600px]">
-                  <button 
-                    onClick={() => setShowForm(false)}
+                  <button
+                    onClick={() => {
+                      setShowForm(false);
+                      setShowFarewell(false);
+                      setStep(0);
+                    }}
                     className="absolute top-8 right-8 text-brand-primary/40 hover:text-brand-primary transition-colors cursor-pointer z-50"
                   >
                     <X size={24} />
@@ -118,9 +133,9 @@ const ContactForm = () => {
                     <img src="/Trebol_2.svg" alt="" className="w-full h-full object-contain" />
                   </div>
                   <div className="absolute top-0 right-0 w-40 h-40 bg-brand-accent/5 rounded-bl-full pointer-events-none" />
-                  
+
                   <div className="w-full h-1 bg-gray-100 mb-12 relative overflow-hidden mt-8">
-                    <motion.div 
+                    <motion.div
                       className="absolute top-0 left-0 h-full bg-[#A68C6B]"
                       initial={{ width: "0%" }}
                       animate={{ width: `${(step / 4) * 100}%` }}
@@ -128,8 +143,35 @@ const ContactForm = () => {
                   </div>
 
                   <AnimatePresence mode="wait">
-                    {step < 3 ? (
-                      <motion.div 
+                    {showFarewell ? (
+                      <motion.div
+                        key="farewell"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        className="flex flex-col items-center justify-center h-full text-center py-12 relative z-10"
+                      >
+                        <div className="w-20 h-20 bg-brand-blue/10 rounded-full flex items-center justify-center mb-8 text-brand-blue">
+                          <Check size={40} />
+                        </div>
+                        <h3 className="text-3xl font-serif text-brand-primary mb-4 uppercase tracking-tight">Gracias por tu sinceridad</h3>
+                        <p className="text-sm text-gray-500 font-serif font-extralight mb-10 max-w-sm uppercase tracking-widest leading-relaxed">
+                          Entendemos que cada viaje tiene su momento. <br />
+                          Estaremos aquí cuando estés listo para vivir la esencia de Costa Rica.
+                        </p>
+                        <button
+                          onClick={() => {
+                            setShowForm(false);
+                            setShowFarewell(false);
+                            setStep(0);
+                          }}
+                          className="text-[10px] font-bold text-brand-blue uppercase tracking-[0.3em] border-b border-brand-blue/30 pb-1 hover:border-brand-blue transition-all cursor-pointer"
+                        >
+                          VOLVER AL INICIO
+                        </button>
+                      </motion.div>
+                    ) : step < 3 ? (
+                      <motion.div
                         key="quiz"
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -139,7 +181,7 @@ const ContactForm = () => {
                         <span className="text-[10px] font-bold tracking-[0.4em] text-brand-accent uppercase mb-4">PASO 0{step + 1} / 04</span>
                         <h3 className="text-3xl font-serif text-brand-primary mb-2">{steps[step].title}</h3>
                         <p className="text-sm text-gray-400 font-serif font-extralight mb-12 uppercase tracking-wider">{steps[step].subtitle}</p>
-                        
+
                         <div className="flex flex-col gap-4">
                           {steps[step].options.map((opt) => {
                             const isSelected = formData[steps[step].field] === opt.label;
@@ -162,7 +204,7 @@ const ContactForm = () => {
                         </div>
 
                         {step > 0 && (
-                          <button 
+                          <button
                             onClick={prevStep}
                             className="mt-auto pt-8 flex items-center gap-2 text-[10px] font-bold text-gray-300 uppercase tracking-[0.3em] hover:text-brand-primary transition-colors cursor-pointer"
                           >
@@ -171,7 +213,7 @@ const ContactForm = () => {
                         )}
                       </motion.div>
                     ) : (
-                      <motion.div 
+                      <motion.div
                         key="form"
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -181,45 +223,45 @@ const ContactForm = () => {
                         <span className="text-[10px] font-bold tracking-[0.4em] text-brand-accent uppercase mb-4">ÚLTIMO PASO</span>
                         <h3 className="text-3xl font-serif text-brand-primary mb-2">Detalles de contacto</h3>
                         <p className="text-sm text-gray-400 font-serif font-extralight mb-10 uppercase tracking-wider">Tu dossier personalizado está casi listo.</p>
-                        
+
                         <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
                           <div className="flex flex-col gap-1.5">
                             <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-1">NOMBRE COMPLETO</label>
-                            <input 
-                              type="text" 
+                            <input
+                              type="text"
                               name="name"
                               value={formData.name}
                               onChange={handleChange}
-                              placeholder="Ej: Julian Barnes" 
-                              className="bg-gray-50 border-none p-5 text-sm focus:ring-1 focus:ring-brand-accent outline-none font-serif font-extralight tracking-widest uppercase transition-all rounded-xl shadow-sm" 
+                              placeholder="Ej: Julian Barnes"
+                              className="bg-gray-50 border-none p-5 text-sm focus:ring-1 focus:ring-brand-accent outline-none font-serif font-extralight tracking-widest uppercase transition-all rounded-xl shadow-sm"
                             />
                           </div>
                           <div className="flex flex-col gap-1.5">
                             <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-1">EMAIL DE CONTACTO</label>
-                            <input 
-                              type="email" 
+                            <input
+                              type="email"
                               name="email"
                               value={formData.email}
                               onChange={handleChange}
-                              placeholder="ejemplo@exclusive.com" 
-                              className="bg-gray-50 border-none p-5 text-sm focus:ring-1 focus:ring-brand-accent outline-none font-serif font-extralight tracking-widest uppercase transition-all rounded-xl shadow-sm" 
+                              placeholder="ejemplo@exclusive.com"
+                              className="bg-gray-50 border-none p-5 text-sm focus:ring-1 focus:ring-brand-accent outline-none font-serif font-extralight tracking-widest uppercase transition-all rounded-xl shadow-sm"
                             />
                           </div>
                           <div className="flex flex-col gap-1.5">
                             <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-1">TELÉFONO (PARA WHATSAPP)</label>
-                            <input 
-                              type="tel" 
+                            <input
+                              type="tel"
                               name="phone"
                               value={formData.phone}
                               onChange={handleChange}
-                              placeholder="+34 ..." 
-                              className="bg-gray-50 border-none p-5 text-sm focus:ring-1 focus:ring-brand-accent outline-none font-serif font-extralight tracking-widest uppercase transition-all rounded-xl shadow-sm" 
+                              placeholder="+34 ..."
+                              className="bg-gray-50 border-none p-5 text-sm focus:ring-1 focus:ring-brand-accent outline-none font-serif font-extralight tracking-widest uppercase transition-all rounded-xl shadow-sm"
                             />
                           </div>
-                          
+
                           <DossierDownloadButton data={formData} />
-                          
-                          <button 
+
+                          <button
                             onClick={prevStep}
                             className="mt-4 flex items-center justify-center gap-2 text-[10px] font-bold text-gray-300 uppercase tracking-[0.3em] hover:text-brand-primary transition-colors cursor-pointer"
                           >
@@ -235,22 +277,7 @@ const ContactForm = () => {
           </AnimatePresence>
         </div>
 
-        <div className="mt-32 flex flex-wrap gap-12 justify-between border-t border-white/5 pt-16">
-            {[
-              { icon: <FileText size={18} />, title: "DOSSIER PDF", text: "Programa detallado e inversión" },
-              { icon: <MapPin size={18} />, title: "HOTELES", text: "Alojamientos seleccionados" },
-              { icon: <Users size={18} />, title: "EXPERIENCIAS", text: "Actividades de conexión local" },
-              { icon: <MessageCircle size={18} />, title: "SOPORTE 1 A 1", text: "Resolvemos todas tus dudas" },
-            ].map((item, i) => (
-              <div key={i} className="flex items-start gap-4 text-white/50 group">
-                <div className="text-brand-accent mt-1 group-hover:scale-110 transition-transform">{item.icon}</div>
-                <div className="flex flex-col gap-1">
-                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-accent">{item.title}</span>
-                  <span className="text-xs font-serif font-extralight tracking-widest uppercase text-white/30">{item.text}</span>
-                </div>
-              </div>
-            ))}
-        </div>
+
       </div>
     </section>
   );

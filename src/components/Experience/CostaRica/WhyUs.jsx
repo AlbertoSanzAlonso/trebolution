@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const WhyUs = () => {
   return (
-    <section className="py-40 px-6 md:px-24 bg-brand-secondary relative overflow-hidden">
+    <section className="pt-40 px-6 md:px-24 bg-brand-secondary relative overflow-hidden">
       {/* Abstract background element */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
 

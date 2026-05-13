@@ -17,11 +17,11 @@ const Gallery = () => {
   };
 
   return (
-    <section id="gallery" className="py-40 px-6 md:px-24 bg-brand-secondary relative">
+    <section id="gallery" className="pb-40 px-6 md:px-24 bg-brand-secondary relative">
       <div className="max-w-[1600px] mx-auto">
         <div className="text-center mb-16 md:mb-24">
           <span className="text-brand-text-light/60 text-[10px] md:text-[11px] font-extralight tracking-[0.4em] uppercase block mb-4 md:mb-6">UN VISTAZO A LO QUE VIVIRÁS</span>
-          <h2 className="text-4xl md:text-7xl font-serif text-white leading-tight uppercase tracking-tight">Galería de <span className="italic text-brand-accent">imágenes</span></h2>
+          <h2 className="text-4xl md:text-7xl font-serif text-white leading-tight uppercase tracking-tight">Costa Rica, <span className="italic text-brand-accent">contada por sus sensaciones.</span></h2>
         </div>
 
         {/* Desktop Grid / Mobile Scroll */}

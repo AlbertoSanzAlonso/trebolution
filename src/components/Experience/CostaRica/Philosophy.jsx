@@ -9,7 +9,15 @@ const Philosophy = () => {
         <div className="grid lg:grid-cols-2 gap-20 md:gap-32 items-center">
 
           {/* Text Content */}
-          <div className="flex flex-col gap-12 order-2 lg:order-1">
+          <div className="flex flex-col gap-12 order-2 lg:order-1 relative">
+            {/* Mobile Watermark Background */}
+            <div className="absolute inset-0 -z-10 opacity-10 md:hidden overflow-hidden pointer-events-none">
+              <img 
+                src={philosophyBg} 
+                alt="" 
+                className="w-full h-full object-cover grayscale brightness-125 scale-150"
+              />
+            </div>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -31,10 +39,10 @@ const Philosophy = () => {
                   <span className="text-[#A68C6B] font-bold">Creamos experiencias</span> que permanecen.
                 </h3>
                 <p className="text-xl md:text-2xl text-brand-primary/70 leading-relaxed font-light">
-                  Cada detalle ha sido vivido antes de proponértelo.
+                  Cada experiencia ha sido vivido antes de proponértelo.
                 </p>
                 <p className="text-lg md:text-xl text-brand-primary/90 font-serif italic">
-                  Hemos explorado previamente los paisajes, evaluado con mimo los hoteles y vivido cada actividad para ofrecerte una experiencia cuidada, segura y auténtica.
+                  Hemos explorado previamente Costa Rica, evaluado con mimo los hoteles y vivido cada actividad para ofrecerte una experiencia cuidada, exclusiva y auténtica.
                 </p>
               </div>
             </motion.div>
@@ -46,7 +54,7 @@ const Philosophy = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2 }}
-            className="relative order-1 lg:order-2"
+            className="relative order-1 lg:order-2 hidden md:block"
           >
             <div className="aspect-4/5 rounded-4xl overflow-hidden shadow-3xl relative">
               <img
@@ -84,16 +92,24 @@ const Philosophy = () => {
           <div className="grid lg:grid-cols-2 min-h-[600px]">
             {/* Main Message */}
             <div className="flex flex-col gap-8 relative z-10 p-12 md:p-20 justify-center overflow-hidden order-2 lg:order-2">
-              {/* Light Blue Watermark */}
-              <div className="absolute -bottom-32 -left-32 w-[600px] h-[600px] opacity-[0.07] pointer-events-none -rotate-12 z-0">
+              {/* Mobile Watermark for Card */}
+              <div className="absolute inset-0 z-0 opacity-10 md:hidden pointer-events-none">
                 <img 
-                  src="/Trebol_2.svg" 
+                  src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&q=80&w=1200" 
                   alt="" 
-                  className="w-full h-full object-contain" 
-                  style={{ filter: 'invert(82%) sepia(15%) saturate(357%) hue-rotate(164deg) brightness(96%) contrast(92%)' }} 
+                  className="w-full h-full object-cover grayscale"
                 />
               </div>
-              
+              {/* Light Blue Watermark */}
+              <div className="absolute -bottom-32 -left-32 w-[600px] h-[600px] opacity-[0.07] pointer-events-none -rotate-12 z-0 hidden md:block">
+                <img
+                  src="/Trebol_2.svg"
+                  alt=""
+                  className="w-full h-full object-contain"
+                  style={{ filter: 'invert(82%) sepia(15%) saturate(357%) hue-rotate(164deg) brightness(96%) contrast(92%)' }}
+                />
+              </div>
+
               <div className="flex flex-col gap-2 relative z-10">
                 <span className="text-brand-secondary text-[10px] font-bold tracking-[0.4em] uppercase mb-4">LA DIFERENCIA TREBOLUTION</span>
                 <p className="text-lg md:text-xl text-brand-primary/80 leading-relaxed max-w-lg font-light mb-4">
@@ -106,7 +122,7 @@ const Philosophy = () => {
             </div>
 
             {/* Visual Side - Full Bleed */}
-            <div className="relative overflow-hidden min-h-[400px] lg:min-h-full order-1 lg:order-1">
+            <div className="relative overflow-hidden min-h-[400px] lg:min-h-full order-1 lg:order-1 hidden md:block">
               <img
                 src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&q=80&w=1200"
                 alt="Trebolution Experience"

@@ -20,17 +20,14 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <span className="text-[13px] md:text-[20px] tracking-[0.4em] uppercase  block mb-6">
+          <span className="text-[13px] md:text-[30px] tracking-[0.4em] uppercase  block mb-6">
             Costa Rica Trebolution Experience
           </span>
-          <h1 className="text-4xl md:text-[6rem] font-serif leading-[0.85] mb-10 tracking-tighter uppercase">
+          <h1 className="text-3xl md:text-[5rem] font-serif leading-[0.85] mb-10 tracking-tighter uppercase">
             Pura vida <br /> <span className="italic font-light">en su máxima expresión</span>
           </h1>
           <p className="text-xl md:text-2xl max-w-2xl opacity-90 leading-relaxed mb-4 font-light italic">
             Un viaje para sentir el mundo de otra manera
-          </p>
-          <p className="text-lg md:text-xl max-w-3xl opacity-80 leading-relaxed mb-12 font-light">
-            Una experiencia auténtica, consciente y transformadora, diseñada desde la vivencia real del destino y acompañada por Trebolution desde el primer momento.
           </p>
 
         </motion.div>

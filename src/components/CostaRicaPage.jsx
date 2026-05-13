@@ -20,9 +20,9 @@ const CostaRicaPage = () => {
       <Hero />
       <Philosophy />
       <WhyUs />
+      <Gallery />
       <WhoIsItFor />
       {/* <Itinerary /> */}
-      <Gallery />
       <ContactForm />
       <CRFooter />
     </div>

@@ -43,7 +43,7 @@ const ExperienceQuestions = ({ formData, setFormData }) => {
 
   return (
     <section className="py-32 px-6 md:px-24 bg-brand-secondary text-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-50" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-50" />
       <div className="max-w-[1400px] mx-auto relative z-10">
         
         <div className="text-center mb-20">
