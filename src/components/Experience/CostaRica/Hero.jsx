@@ -1,16 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
+import heroVideo from '../../../assets/costa-rica-hero-segment.mp4';
+
 
 const Hero = () => {
   return (
     <section className="relative h-[110vh] flex items-center justify-start px-6 md:px-40 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <img
-          src="/assets/images/costa-rica-hero.png"
-          alt="Costa Rica Landscape"
-          className="w-full h-full object-cover"
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover scale-[1.15] origin-top-left"
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-black/35" />
       </div>
 
