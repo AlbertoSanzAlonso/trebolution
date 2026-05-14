@@ -168,14 +168,14 @@ const Itinerary = () => {
                       <span className="hidden md:block text-black opacity-40 text-[9px] font-bold tracking-[0.4em] uppercase">Día del viaje</span>
                     )}
                     {day.inclusions ? (
-                      <div className="flex flex-col gap-0 md:gap-2 opacity-20 md:opacity-40 select-none">
+                      <div className="hidden md:flex flex-col gap-0 md:gap-2 opacity-20 md:opacity-40 select-none">
                         <span className="text-black text-[10px] md:text-xs font-bold tracking-[0.5em] uppercase mb-1">LO QUE</span>
                         <h3 className="text-5xl md:text-[7rem] font-serif leading-none text-black whitespace-pre-line">
                           INCLUYE
                         </h3>
                       </div>
                     ) : (
-                      <h3 className={`text-4xl ${day.type === 'day' ? 'md:text-[9rem]' : 'md:text-[5.5rem]'} font-serif leading-none text-[#00132C] md:text-black select-none whitespace-pre-line ${day.day === 'TU EXPERIENCIA' ? 'hidden md:block' : ''}`}>
+                      <h3 className={`text-4xl ${day.type === 'day' ? 'md:text-[9rem]' : 'md:text-[5.5rem]'} font-serif leading-none text-[#00132C] md:text-black select-none whitespace-pre-line ${/^\d+$/.test(day.day) ? '' : 'hidden md:block'}`}>
                         {day.day}
                       </h3>
                     )}
@@ -217,7 +217,7 @@ const Itinerary = () => {
               )}
 
               {/* Right Column: Detailed Info */}
-              <div className={`w-full ${day.isFinal ? 'md:w-full md:pr-0' : 'md:w-[55%] md:pr-32'} h-full flex flex-col justify-center p-8 md:p-24 overflow-y-auto`}>
+              <div className={`w-full ${day.isFinal ? 'md:w-full md:pr-0' : 'md:w-[55%] md:pr-32'} h-full flex flex-col ${day.isFinal ? 'justify-center' : 'justify-end md:justify-center'} px-12 py-8 ${day.isFinal ? '' : 'pb-12 md:pb-24'} md:p-24 overflow-y-auto`}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -232,6 +232,14 @@ const Itinerary = () => {
                         {day.title}
                       </h2>
                       <div className="w-24 h-0.5 bg-[#A68C6B]/40" />
+                    </div>
+                  )}
+
+                  {day.inclusions && (
+                    <div className="flex flex-col gap-2 md:hidden mb-2 items-center text-center">
+                      <span className="text-[#A68C6B] text-[8px] font-bold tracking-[0.5em] uppercase">DETALLES FINALES</span>
+                      <h2 className="text-xl font-serif text-[#00132C] leading-tight uppercase tracking-wider">LO QUE INCLUYE</h2>
+                      <div className="w-12 h-0.5 bg-[#A68C6B]/40 mt-1" />
                     </div>
                   )}
 
@@ -312,7 +320,7 @@ const Itinerary = () => {
 
                   {/* Inclusions Grid (for Inclusions slide) */}
                   {day.inclusions && (
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 md:gap-y-12 gap-x-4 md:gap-x-12 mt-8 md:mt-12">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-y-2 md:gap-y-12 gap-x-1 md:gap-x-12 mt-2 md:mt-12">
                       {day.inclusions.map((item, idx) => {
                         const Icon = IconMap[item.icon];
                         return (
@@ -323,11 +331,11 @@ const Itinerary = () => {
                             transition={{ delay: idx * 0.05 }}
                             className="flex flex-col items-center text-center gap-3 md:gap-4 group"
                           >
-                            <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-[#A68C6B] flex items-center justify-center text-white transition-all duration-500 shadow-xl shadow-[#A68C6B]/20">
-                              {Icon && <Icon size={24} className="md:w-8 md:h-8" />}
+                            <div className="w-8 h-8 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-[#A68C6B] flex items-center justify-center text-white transition-all duration-500 shadow-xl shadow-[#A68C6B]/20">
+                              {Icon && <Icon size={16} className="md:w-8 md:h-8" />}
                             </div>
                             <div className="flex flex-col gap-1 items-center">
-                              <span className="text-[9px] md:text-[11px] font-medium text-[#00132C]/80 md:text-white/80 leading-snug uppercase tracking-[0.15em] max-w-[140px] md:max-w-[180px]">
+                              <span className="text-[8px] md:text-[11px] font-medium text-[#00132C]/80 md:text-white/80 leading-snug uppercase tracking-[0.15em] max-w-[140px] md:max-w-[180px]">
                                 {item.label}
                               </span>
                             </div>
