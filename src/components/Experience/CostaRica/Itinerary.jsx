@@ -175,7 +175,7 @@ const Itinerary = () => {
                         </h3>
                       </div>
                     ) : (
-                      <h3 className={`text-4xl ${day.type === 'day' ? 'md:text-[9rem]' : 'md:text-[5.5rem]'} font-serif leading-none text-[#00132C] md:text-black select-none whitespace-pre-line`}>
+                      <h3 className={`text-4xl ${day.type === 'day' ? 'md:text-[9rem]' : 'md:text-[5.5rem]'} font-serif leading-none text-[#00132C] md:text-black select-none whitespace-pre-line ${day.day === 'TU EXPERIENCIA' ? 'hidden md:block' : ''}`}>
                         {day.day}
                       </h3>
                     )}
