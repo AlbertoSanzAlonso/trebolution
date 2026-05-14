@@ -4,20 +4,30 @@ import philosophyBg from '../../../assets/philosophy_bg_clean.png';
 
 const Philosophy = () => {
   return (
-    <section className="bg-brand-accent py-40 px-6 md:px-24 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto">
+    <section className="bg-brand-accent py-40 px-6 md:px-24 relative overflow-hidden">
+      {/* Watermark Clover */}
+      <div className="absolute -top-40 -left-40 w-[600px] h-[600px] opacity-[0.05] pointer-events-none -rotate-12 z-0">
+        <img
+          src="/Trebol_2.svg"
+          alt=""
+          className="w-full h-full object-contain"
+        />
+      </div>
+
+      {/* Bottom Right Watermark Clover */}
+      <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] opacity-[0.05] pointer-events-none rotate-12 z-0">
+        <img
+          src="/Trebol_2.svg"
+          alt=""
+          className="w-full h-full object-contain"
+        />
+      </div>
+
+      <div className="max-w-[1400px] mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-20 md:gap-32 items-center">
 
           {/* Text Content */}
           <div className="flex flex-col gap-12 order-2 lg:order-1 relative">
-            {/* Mobile Watermark Background */}
-            <div className="absolute inset-0 -z-10 opacity-10 md:hidden overflow-hidden pointer-events-none">
-              <img 
-                src={philosophyBg} 
-                alt="" 
-                className="w-full h-full object-cover grayscale brightness-125 scale-150"
-              />
-            </div>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}

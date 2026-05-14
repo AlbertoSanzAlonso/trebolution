@@ -3,11 +3,20 @@ import { motion } from 'framer-motion';
 
 const WhyUs = () => {
   return (
-    <section className="pt-40 px-6 md:px-24 bg-brand-secondary relative overflow-hidden">
+    <section className="pt-40 pb-0 px-6 md:px-24 bg-brand-secondary relative overflow-hidden">
+      {/* Watermark Clover */}
+      <div className="absolute -top-40 -left-40 w-[600px] h-[600px] opacity-[0.03] pointer-events-none -rotate-12 z-0">
+        <img
+          src="/Trebol_2.svg"
+          alt=""
+          className="w-full h-full object-contain brightness-0 invert"
+        />
+      </div>
+
       {/* Abstract background element */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
 
-      <div className="max-w-[1400px] mx-auto mb-20">
+      <div className="max-w-[1400px] mx-auto mb-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center mb-32">
           <div>
             <span className="text-brand-accent text-[11px] font-bold tracking-[0.4em] uppercase block mb-8">

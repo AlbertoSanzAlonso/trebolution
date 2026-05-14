@@ -3,8 +3,25 @@ import { Check, X } from 'lucide-react';
 
 const WhoIsItFor = () => {
   return (
-    <section className="bg-white pt-40 pb-20 px-6 md:px-24">
-      <div className="max-w-[1400px] mx-auto">
+    <section className="bg-white pt-40 pb-20 px-6 md:px-24 relative overflow-hidden">
+      <div className="absolute -top-40 -left-40 w-[600px] h-[600px] opacity-[0.05] pointer-events-none -rotate-12 z-0">
+        <img
+          src="/Trebol_2.svg"
+          alt=""
+          className="w-full h-full object-contain"
+        />
+      </div>
+
+      {/* Bottom Right Watermark Clover */}
+      <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] opacity-[0.05] pointer-events-none rotate-12 z-0">
+        <img
+          src="/Trebol_2.svg"
+          alt=""
+          className="w-full h-full object-contain"
+        />
+      </div>
+
+      <div className="max-w-[1400px] mx-auto relative z-10">
         
         {/* Intro Banner: Perfiles Afines */}
         <div className="bg-[#00132C] text-white rounded-4xl p-12 md:p-20 text-center mb-20 shadow-2xl relative overflow-hidden flex flex-col items-center justify-center">
