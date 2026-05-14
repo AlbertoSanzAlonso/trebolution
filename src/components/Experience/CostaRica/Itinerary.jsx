@@ -133,14 +133,17 @@ const Itinerary = () => {
             </div>
 
             {/* Page Number Indicator */}
-            <div className="absolute top-8 right-8 md:top-12 md:right-12 z-30 pointer-events-none">
-              <span className="text-white/40 text-xs md:text-base font-bold tracking-[0.5em]">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-            </div>
+            {!day.isFinal && (
+              <div className="absolute top-8 right-8 md:top-12 md:right-12 z-30 pointer-events-none">
+                <span className="text-white/40 text-xs md:text-base font-bold tracking-[0.5em]">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+              </div>
+            )}
 
             {/* Petal Watermark Texture with Masked Day Number */}
-            <div className="absolute inset-0 z-1 pointer-events-none overflow-hidden" style={{ mixBlendMode: 'screen' }}>
+            {!day.isFinal && (
+              <div className="absolute inset-0 z-1 pointer-events-none overflow-hidden" style={{ mixBlendMode: 'screen' }}>
               <div
                 className="absolute bottom-[12%] md:bottom-[2%] left-[-50%] md:left-[-20%] w-[150px] h-[150px]"
                 style={{
@@ -177,7 +180,7 @@ const Itinerary = () => {
                   )}
                 </div>
               </div>
-            </div>
+            )}
 
             {/* Content Container */}
             <div className="relative z-10 w-full h-full flex flex-col md:flex-row">
@@ -214,9 +217,9 @@ const Itinerary = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  className="flex flex-col gap-1 md:gap-10 max-w-xl md:ml-auto"
+                  className={`flex flex-col gap-1 md:gap-10 max-w-2xl ${day.isFinal ? 'mx-auto items-center text-center' : 'md:ml-auto'}`}
                 >
-                  {!day.inclusions && (
+                  {!day.inclusions && !day.isFinal && (
                     <div className="flex flex-col gap-4">
                       <span className="text-[#A68C6B] text-[10px] font-bold tracking-[0.5em] uppercase">
                         {day.title === 'TU EXPERIENCIA' ? 'TU EXPERIENCIA' : (day.type === 'intro' ? 'INFORMACIÓN PREVIA' : day.type === 'outro' ? 'DETALLES FINALES' : 'EXPERIENCIA EXCLUSIVA')}
@@ -229,9 +232,21 @@ const Itinerary = () => {
                   )}
 
                   {day.desc && (
-                    <p className={`text-base ${day.type === 'outro' ? 'md:text-xl' : 'md:text-2xl'} text-[#00132C]/70 md:text-white/70 font-light leading-relaxed max-w-2xl whitespace-pre-line`}>
-                      {day.desc}
-                    </p>
+                    <div className="flex flex-col items-center gap-12">
+                      <p className={`text-base ${day.isFinal ? 'text-2xl md:text-5xl !leading-tight font-serif italic' : (day.type === 'outro' ? 'md:text-xl' : 'md:text-2xl')} text-[#00132C]/70 md:text-white/70 font-light leading-relaxed max-w-4xl whitespace-pre-line`}>
+                        {day.desc}
+                      </p>
+                      {day.isFinal && (
+                        <motion.img 
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 0.8, scale: 1 }}
+                          transition={{ delay: 0.5, duration: 1 }}
+                          src="/Trebol_2.svg"
+                          alt="Trebolution"
+                          className="w-20 md:w-32 h-20 md:h-32 object-contain"
+                        />
+                      )}
+                    </div>
                   )}
 
                   {/* Interactive Index Sections */}

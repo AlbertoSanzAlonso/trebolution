@@ -177,8 +177,9 @@ const itineraryData = [
     },
     {
         type: "outro",
-        day: "19",
+        day: "",
         date: "Cierre",
+        isFinal: true,
         title: "Lo Extraordinario",
         desc: ' "VIAJAMOS PARA ENCONTRAR LO EXTRAORDINARIO EN LO ESENCIAL." ',
         img: "https://images.unsplash.com/photo-1518182170546-07661fd94144?auto=format&fit=crop&q=80&w=1200"
