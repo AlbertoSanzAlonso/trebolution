@@ -119,7 +119,7 @@ const Itinerary = () => {
         {itineraryData.map((day, i) => (
           <div
             key={i}
-            className="snap-center w-screen h-[92vh] shrink-0 relative flex flex-col md:flex-row overflow-hidden"
+            className="snap-center snap-always w-screen h-[92vh] shrink-0 relative flex flex-col md:flex-row overflow-hidden"
           >
             {/* Background Image Layer */}
             <div className="absolute inset-0 z-0">

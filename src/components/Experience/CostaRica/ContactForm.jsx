@@ -35,26 +35,6 @@ const ContactForm = ({ onSubmitted }) => {
 
   const steps = [
     {
-      title: "¿Qué tipo de experiencia buscas?",
-      subtitle: "Cada detalle está diseñado para resonar con tu estilo de viaje.",
-      field: "experienceType",
-      options: [
-        { label: "EXPLORACIÓN ÍNTIMA", sub: "Rituales, conexión y calma." },
-        { label: "AVENTURA EXCLUSIVA", sub: "Naturaleza salvaje con máximo confort." },
-        { label: "VIAJE TRANSFORMADOR", sub: "Propósito, introspección y evolución." }
-      ]
-    },
-    {
-      title: "¿Quién te acompaña en esta evolución?",
-      subtitle: "Personalizamos la logística según tu círculo más cercano.",
-      field: "travelers",
-      options: [
-        { label: "VIAJE EN SOLITARIO", sub: "Un reencuentro contigo mismo." },
-        { label: "EN PAREJA", sub: "Compartiendo la esencia del destino." },
-        { label: "PEQUEÑO GRUPO", sub: "Amigos o familia (máx 6 personas)." }
-      ]
-    },
-    {
       title: "¿Estarías dispuesto a invertir entre 3.000€ y 4.000€ en esta experiencia?",
       subtitle: "Una inversión en lo que realmente importa.",
       field: "budget",
@@ -138,7 +118,7 @@ const ContactForm = ({ onSubmitted }) => {
                     <motion.div
                       className="absolute top-0 left-0 h-full bg-[#A68C6B]"
                       initial={{ width: "0%" }}
-                      animate={{ width: `${(step / 4) * 100}%` }}
+                      animate={{ width: `${(step / (steps.length + 1)) * 100}%` }}
                     />
                   </div>
 
@@ -170,7 +150,7 @@ const ContactForm = ({ onSubmitted }) => {
                           VOLVER AL INICIO
                         </button>
                       </motion.div>
-                    ) : step < 3 ? (
+                    ) : step < steps.length ? (
                       <motion.div
                         key="quiz"
                         initial={{ opacity: 0, x: 20 }}
@@ -178,7 +158,7 @@ const ContactForm = ({ onSubmitted }) => {
                         exit={{ opacity: 0, x: -20 }}
                         className="flex flex-col h-full relative z-10"
                       >
-                        <span className="text-[10px] font-bold tracking-[0.4em] text-brand-accent uppercase mb-4">PASO 0{step + 1} / 04</span>
+                        <span className="text-[10px] font-bold tracking-[0.4em] text-brand-accent uppercase mb-4">PASO 0{step + 1} / 0{steps.length + 1}</span>
                         <h3 className="text-3xl font-serif text-brand-primary mb-2">{steps[step].title}</h3>
                         <p className="text-sm text-gray-400 font-serif font-extralight mb-12 uppercase tracking-wider">{steps[step].subtitle}</p>
 

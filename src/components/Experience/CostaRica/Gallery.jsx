@@ -39,7 +39,7 @@ const Gallery = () => {
         {/* Desktop Grid / Mobile Scroll */}
         <div className="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pb-12 md:pb-0 -mx-6 px-12 md:mx-0 md:px-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 md:gap-x-10 gap-y-20 custom-scrollbar-hide">
           {galleryItems.map((item, i) => (
-            <div key={i} className="shrink-0 w-[70vw] sm:w-[400px] md:w-auto snap-center mr-4 md:mr-0">
+            <div key={i} className="shrink-0 w-[70vw] sm:w-[400px] md:w-auto snap-center snap-always mr-4 md:mr-0">
               <GalleryCard
                 {...item}
                 img={item.galleryImg || item.img}
