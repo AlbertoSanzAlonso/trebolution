@@ -1,202 +1,162 @@
-import { useState } from 'react';
-import { X, Building2, Calendar, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
-import ItineraryCard from './ItineraryCard';
+import React, { useRef } from 'react';
+import { Building2, Calendar, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { itineraryData } from '../itineraryData';
+import { motion } from 'framer-motion';
 
 const Itinerary = () => {
-  const [selectedDay, setSelectedDay] = useState(null);
+  const scrollRef = useRef(null);
 
-  const currentIndex = selectedDay ? itineraryData.findIndex(item => item.day === selectedDay.day) : -1;
-
-  const handlePrev = () => {
-    if (currentIndex > 0) setSelectedDay(itineraryData[currentIndex - 1]);
-  };
-
-  const handleNext = () => {
-    if (currentIndex < itineraryData.length - 1) setSelectedDay(itineraryData[currentIndex + 1]);
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollTo = direction === 'left' 
+        ? scrollLeft - clientWidth 
+        : scrollLeft + clientWidth;
+      
+      scrollRef.current.scrollTo({
+        left: scrollTo,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
-    <section id="itinerary" className="py-40 px-6 md:px-24 bg-brand-secondary relative">
-      <div className="max-w-[1600px] mx-auto">
-        <div className="text-center mb-16 md:mb-24">
-          <span className="text-brand-text-light/60 text-[10px] md:text-[11px] font-extralight tracking-[0.4em] uppercase block mb-4 md:mb-6">UN VISTAZO A LO QUE VIVIRÁS</span>
-          <h2 className="text-4xl md:text-7xl font-serif text-white leading-tight uppercase tracking-tight">Experiencias que <span className="italic text-brand-accent">transforman</span></h2>
-        </div>
-
-        {/* Desktop Grid / Mobile Scroll */}
-        <div className="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pb-12 md:pb-0 -mx-6 px-12 md:mx-0 md:px-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 md:gap-x-10 gap-y-20 custom-scrollbar-hide">
-          {itineraryData.map((item, i) => (
-            <div key={i} className="shrink-0 w-[70vw] sm:w-[400px] md:w-auto snap-center mr-4 md:mr-0">
-              <ItineraryCard
-                {...item}
-                onClick={() => setSelectedDay(item)}
-              />
-            </div>
-          ))}
-
-        </div>
+    <section id="itinerary" className="bg-brand-primary min-h-screen relative overflow-hidden">
+      {/* Navigation Controls - Desktop */}
+      <div className="hidden md:flex absolute inset-y-0 left-0 right-0 items-center justify-between px-8 z-50 pointer-events-none">
+        <button
+          onClick={() => scroll('left')}
+          className="pointer-events-auto w-16 h-16 flex items-center justify-center rounded-full bg-white/5 text-white hover:bg-white/20 transition-all cursor-pointer backdrop-blur-md border border-white/10"
+        >
+          <ChevronLeft size={32} strokeWidth={1} />
+        </button>
+        <button
+          onClick={() => scroll('right')}
+          className="pointer-events-auto w-16 h-16 flex items-center justify-center rounded-full bg-white/5 text-white hover:bg-white/20 transition-all cursor-pointer backdrop-blur-md border border-white/10"
+        >
+          <ChevronRight size={32} strokeWidth={1} />
+        </button>
       </div>
 
-      {/* PREMIUM MODAL - Instant loading for performance */}
-      {selectedDay && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-6 md:p-12">
-          {/* Backdrop - No animation, no blur for maximum speed */}
-          <div
-            onClick={() => setSelectedDay(null)}
-            className="absolute inset-0 bg-brand-primary/95"
-          />
-
-          {/* Modal Container - Instant appearance */}
-          <div
-            className="w-full max-w-6xl h-full max-h-[90vh] rounded-4xl overflow-hidden shadow-2xl relative z-10 flex flex-col md:flex-row bg-brand-primary"
+      {/* Main Horizontal Slider */}
+      <div 
+        ref={scrollRef}
+        className="flex overflow-x-auto snap-x snap-mandatory h-[85vh] custom-scrollbar-hide"
+      >
+        {itineraryData.map((day, i) => (
+          <div 
+            key={i} 
+            className="snap-center w-screen h-[85vh] shrink-0 relative flex flex-col md:flex-row overflow-hidden"
           >
-            {/* Full Background Image */}
+            {/* Background Image Layer */}
             <div className="absolute inset-0 z-0">
               <img
-                src={selectedDay.img}
-                alt={selectedDay.title}
+                src={day.img}
+                alt={day.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black/20" />
-              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent md:bg-linear-to-r md:from-black/80 md:via-black/20 md:to-transparent" />
+              <div className="absolute inset-0 bg-black/40" />
+              <div className="absolute inset-0 bg-linear-to-t from-brand-primary via-brand-primary/20 to-transparent md:bg-linear-to-r md:from-brand-primary md:via-brand-primary/40 md:to-transparent" />
             </div>
 
-            {/* THE PETAL BLOCK WITH MASKED DAY NUMBER */}
-            <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden" style={{ mixBlendMode: 'screen' }}>
+            {/* Petal Watermark Texture with Masked Day Number */}
+            <div className="absolute inset-0 z-1 pointer-events-none overflow-hidden" style={{ mixBlendMode: 'screen' }}>
               <div
-                className="absolute bottom-[2%] right-[-5%] w-[150px] h-[150px]"
+                className="absolute bottom-[2%] left-[-20%] w-[150px] h-[150px]"
                 style={{
-                  filter: 'drop-shadow(-30px -30px 70px rgba(0,0,0,0.25))',
-                  transform: 'translate(10%, 10%) rotate(-40deg) scale(12)',
+                  transform: 'translate(-10%, 10%) rotate(40deg) scale(15) scaleX(-1)',
                   transformOrigin: 'center'
                 }}
               >
                 <div
-                  className="w-full h-full relative overflow-hidden"
+                  className="w-full h-full relative"
                   style={{
                     clipPath: 'path("M 50,100 C 50,100 0,60 0,35 C 0,15 15,0 35,0 C 45,0 50,10 50,10 C 50,10 55,0 65,0 C 85,0 100,15 100,35 C 100,60 50,100 50,100 Z")',
-                    background: 'rgba(255, 255, 255, 0.88)',
+                    background: 'rgba(255, 255, 255, 0.85)',
                   }}
                 />
               </div>
 
-              {/* Day Number Mask (Black text on Screen blend mode creates transparency) */}
-              <div className="absolute inset-0 p-12 md:p-20 pb-6 md:pb-20 flex flex-col justify-end">
-                <div className="md:w-1/3">
-                  <span className="text-black text-[12px] font-bold tracking-[0.4em] uppercase block mb-4">COSTA RICA EXPERIENCE</span>
-                  <h3 className="text-6xl md:text-9xl font-serif leading-none text-black whitespace-nowrap">
-                    {selectedDay.day}
+              {/* Masked Text (Black text in screen mode becomes transparent) */}
+              <div className="absolute bottom-8 left-12 md:bottom-16 md:left-24">
+                <div className="flex flex-col gap-1">
+                  <span className="text-black text-[9px] font-bold tracking-[0.4em] uppercase opacity-40">Día del viaje</span>
+                  <h3 className="text-8xl md:text-[11rem] font-serif leading-none text-black select-none">
+                    {day.day}
                   </h3>
                 </div>
               </div>
             </div>
 
-            {/* Close Button */}
-            {/* Close Button - Responsive Style */}
-            <button
-              onClick={() => setSelectedDay(null)}
-              className="absolute top-8 right-8 z-50 bg-white md:bg-transparent text-brand-primary md:text-white p-3 md:p-4 rounded-full transition-all duration-300 md:opacity-40 md:hover:opacity-100 md:shadow-none shadow-xl cursor-pointer border border-brand-primary/10 md:border-none"
-            >
-              <X className="w-6 h-6 md:w-10 md:h-10" strokeWidth={1} />
-            </button>
-
-            {/* Navigation Arrows - Desktop Only Version */}
-            <div className="hidden md:flex absolute inset-y-0 left-0 right-0 items-center justify-between px-4 pointer-events-none z-50">
-              <button
-                onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                disabled={currentIndex === 0}
-                className={`pointer-events-auto w-auto h-auto p-4 flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${currentIndex === 0 ? 'opacity-0 scale-50' : 'bg-transparent text-white opacity-40 hover:opacity-100'
-                  }`}
-              >
-                <ChevronLeft className="w-14 h-14" strokeWidth={1} />
-              </button>
-              <button
-                onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                disabled={currentIndex === itineraryData.length - 1}
-                className={`pointer-events-auto w-auto h-auto p-4 flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${currentIndex === itineraryData.length - 1 ? 'opacity-0 scale-50' : 'bg-transparent text-brand-primary opacity-40 hover:opacity-100'
-                  }`}
-              >
-                <ChevronRight className="w-14 h-14" strokeWidth={1} />
-              </button>
-            </div>
-
-            {/* UI Overlay / Left Column - Desktop Only Version */}
-            <div className="hidden md:flex absolute md:relative inset-0 md:inset-auto z-50 w-full md:w-1/3 h-full p-8 md:p-20 flex-col justify-between pointer-events-none">
-              <div className="flex flex-col gap-4 items-start">
-                <div className="flex items-center gap-3 text-white/80">
-                  <Calendar size={16} className="text-brand-accent" />
-                  <span className="text-[11px] font-bold tracking-[0.3em] uppercase">{selectedDay.date}</span>
-                </div>
-                <div className="flex items-center gap-3 text-white/80">
-                  <MapPin size={16} className="text-brand-accent" />
-                  <span className="text-[11px] font-bold tracking-[0.3em] uppercase">{selectedDay.location}</span>
+            {/* Content Container */}
+            <div className="relative z-10 w-full h-full flex flex-col md:flex-row">
+              
+              {/* Left Column: Visual/Meta */}
+              <div className="w-full md:w-[45%] h-1/2 md:h-full p-8 md:p-20 flex flex-col justify-start">
+                <div className="flex flex-col gap-6">
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    className="flex items-center gap-4 text-[#00132C]"
+                  >
+                    <Calendar size={18} className="text-[#A68C6B]" />
+                    <span className="text-xs font-bold tracking-[0.4em] uppercase">{day.date}</span>
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="flex items-center gap-4 text-[#00132C]"
+                  >
+                    <MapPin size={18} className="text-[#A68C6B]" />
+                    <span className="text-xs font-bold tracking-[0.4em] uppercase">{day.location}</span>
+                  </motion.div>
                 </div>
               </div>
-              <div className="h-40" />
+
+              {/* Right Column: Detailed Info - Pushed to the right */}
+              <div className="w-full md:w-[55%] h-1/2 md:h-full flex flex-col justify-center p-8 md:p-24 md:pr-32 overflow-y-auto ml-auto">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  className="flex flex-col gap-8 md:gap-10 max-w-xl ml-auto"
+                >
+                  <div className="flex flex-col gap-4">
+                    <span className="text-[#A68C6B] text-[10px] font-bold tracking-[0.5em] uppercase">EXPERIENCIA EXCLUSIVA</span>
+                    <h2 className="text-3xl md:text-7xl font-serif text-white leading-tight">
+                      {day.title}
+                    </h2>
+                    <div className="w-24 h-0.5 bg-[#A68C6B]/40" />
+                  </div>
+
+                  <p className="text-base md:text-2xl text-white/70 font-light leading-relaxed max-w-2xl">
+                    {day.desc}
+                  </p>
+
+                  <div className="mt-8 p-6 md:p-10 bg-white/5 rounded-3xl border border-white/10 flex items-center gap-6 md:gap-8 group hover:bg-white/10 transition-all duration-500">
+                    <div className="w-12 h-12 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center text-brand-primary shrink-0 shadow-2xl group-hover:scale-110 transition-transform duration-500">
+                      <Building2 className="w-6 h-6 md:w-10 md:h-10" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[9px] md:text-[11px] font-bold text-white/30 uppercase tracking-[0.4em] mb-1 md:mb-2">Alojamiento seleccionado</span>
+                      <span className="text-xl md:text-3xl font-medium text-white">{day.hotel}</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
             </div>
 
-            {/* Content Side with Custom Scrollbar */}
-            <div className="relative z-30 w-full md:w-2/3 h-full flex flex-col overflow-y-auto custom-scrollbar">
-              <div className="p-8 md:p-24 pt-32 pb-40 md:pt-24 md:pb-20 min-h-full flex flex-col justify-end gap-5 md:gap-10 relative">
-                <div className="flex flex-col gap-3 md:gap-6">
-                  {/* Mobile Only Date and Location (Hidden on Desktop) */}
-                  <div className="flex md:hidden flex-col gap-1 mb-2">
-                    <div className="flex items-center gap-2 text-brand-primary/60">
-                      <Calendar size={14} className="text-brand-primary" />
-                      <span className="text-[10px] font-bold tracking-[0.2em] uppercase">{selectedDay.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-brand-primary/60">
-                      <MapPin size={14} className="text-brand-primary" />
-                      <span className="text-[10px] font-bold tracking-[0.2em] uppercase">{selectedDay.location}</span>
-                    </div>
-                  </div>
-                  <h2 className="text-2xl md:text-5xl font-serif text-brand-primary leading-tight max-w-[90%]">
-                    {selectedDay.title}
-                  </h2>
-                  <div className="w-20 h-1 bg-brand-accent/30" />
-                </div>
-
-                <p className="text-sm md:text-xl text-brand-primary/70 font-light leading-relaxed max-w-[88%] md:max-w-none">
-                  {selectedDay.desc}
-                </p>
-
-                {/* Mobile-only Navigation Buttons (In-flow) */}
-                <div className="flex md:hidden items-center justify-between mt-0 py-1">
-                  <button
-                    onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                    disabled={currentIndex === 0}
-                    className={`flex items-center gap-2 text-brand-primary transition-all duration-300 ${currentIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-                  >
-                    <ChevronLeft size={18} />
-                    <span className="text-[10px] font-bold tracking-widest uppercase">Anterior</span>
-                  </button>
-
-                  <button
-                    onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                    disabled={currentIndex === itineraryData.length - 1}
-                    className={`flex items-center gap-2 text-brand-primary transition-all duration-300 ${currentIndex === itineraryData.length - 1 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-                  >
-                    <span className="text-[10px] font-bold tracking-widest uppercase">Siguiente</span>
-                    <ChevronRight size={18} />
-                  </button>
-                </div>
-
-                <div className="mt-1 md:mt-8 p-3 md:p-8 bg-brand-secondary/30 rounded-2xl flex items-center gap-3 md:gap-6 border border-brand-primary/5">
-                  <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-white shadow-xl flex items-center justify-center text-brand-primary shrink-0">
-                    <Building2 className="w-4 h-4 md:w-7 md:h-7" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-[8px] md:text-[10px] font-bold text-brand-primary/30 uppercase tracking-[0.3em] mb-0.5 md:mb-1">Alojamiento seleccionado</span>
-                    <span className="text-base md:text-xl font-medium text-brand-primary">{selectedDay.hotel}</span>
-                  </div>
-                </div>
-
+            {/* Mobile Navigation Hint */}
+            <div className="absolute bottom-8 left-0 w-full flex justify-center md:hidden pointer-events-none">
+              <div className="flex items-center gap-4 text-white/30 text-[9px] font-bold tracking-[0.3em] uppercase">
+                <ChevronLeft size={12} /> Desliza para explorar <ChevronRight size={12} />
               </div>
             </div>
+
           </div>
-        </div>
-      )}
+        ))}
+      </div>
     </section>
   );
 };

@@ -114,22 +114,6 @@ const WhoIsItFor = () => {
           </div>
 
         </div>
-
-        {/* Action Buttons Integrados Organicamente */}
-        <div className="mt-20 flex flex-col sm:flex-row justify-center items-center gap-6 relative z-10 w-full px-4 sm:px-0">
-          <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="w-full sm:w-auto bg-[#00132C] text-white px-12 py-6 text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#A68C6B] hover:text-[#00132C] transition-all duration-500 shadow-2xl rounded-full cursor-pointer border border-[#00132C] hover:border-[#A68C6B]"
-          >
-            Solicitar acceso a la experiencia
-          </button>
-          <button
-            onClick={() => document.getElementById('itinerary')?.scrollIntoView({ behavior: 'smooth' })}
-            className="w-full sm:w-auto border border-[#00132C]/20 bg-white text-[#00132C] px-12 py-6 text-xs font-extralight uppercase tracking-[0.2em] hover:border-[#00132C] hover:bg-[#00132C] hover:text-[#A68C6B] transition-all duration-500 shadow-lg rounded-full cursor-pointer flex items-center justify-center gap-3"
-          >
-            VER PROGRAMA COMPLETO
-          </button>
-        </div>
       </div>
     </section>
   );

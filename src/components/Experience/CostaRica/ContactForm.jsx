@@ -3,7 +3,7 @@ import { ChevronRight, ArrowLeft, Check, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import DossierDownloadButton from '../../Dossier/DossierDownloadButton';
 
-const ContactForm = () => {
+const ContactForm = ({ onSubmitted }) => {
   const [showForm, setShowForm] = useState(false);
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({
@@ -259,7 +259,7 @@ const ContactForm = () => {
                             />
                           </div>
 
-                          <DossierDownloadButton data={formData} />
+                          <DossierDownloadButton data={formData} onSuccess={onSubmitted} />
 
                           <button
                             onClick={prevStep}
