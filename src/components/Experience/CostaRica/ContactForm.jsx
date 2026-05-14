@@ -67,13 +67,13 @@ const ContactForm = () => {
 
   return (
     <section id="contact" className="py-40 px-6 md:px-24 bg-brand-primary relative overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-30">
+      <div className="absolute inset-0 z-0 opacity-50">
         <img 
           src="/assets/images/costa-rica-hero.png" 
           alt="" 
           className="w-full h-full object-cover brightness-75 contrast-110"
         />
-        <div className="absolute inset-0 bg-brand-primary/40 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-brand-primary/20 mix-blend-multiply" />
       </div>
       <div className="absolute left-0 bottom-0 w-full h-1/2 bg-linear-to-t from-brand-accent/5 to-transparent pointer-events-none z-1" />
 

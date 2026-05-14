@@ -40,7 +40,7 @@ const WhoIsItFor = () => {
                 "Valoras experiencias que te permitan desacelerar y conectar contigo.",
                 "Crees en una forma más consciente y respetuosa de viajar."
               ].map((text, i) => (
-                <li key={i} className="flex gap-5 items-start text-[#A68C6B]">
+                <li key={i} className="flex gap-5 items-start text-white">
                   <div className="mt-1.5 w-5 h-5 rounded-full border border-brand-accent/40 flex items-center justify-center shrink-0">
                     <div className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
                   </div>
@@ -86,7 +86,7 @@ const WhoIsItFor = () => {
                 "Buscas únicamente lujo superficial sin conexión emocional con el viaje.",
                 "No conectas con una manera más consciente y humana de descubrir el mundo."
               ].map((text, i) => (
-                <li key={i} className="flex gap-5 items-start text-[#00132C]/70">
+                <li key={i} className="flex gap-5 items-start text-[#00132C]">
                   <div className="mt-1.5 w-5 h-5 rounded-full border border-[#00132C]/10 flex items-center justify-center shrink-0">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#00132C]/20" />
                   </div>
