@@ -237,7 +237,7 @@ const Itinerary = () => {
 
                   {day.desc && (
                     <div className="flex flex-col items-center gap-12">
-                      <p className={`${day.isFinal ? 'text-7xl md:text-6xl leading-tight! font-serif italic font-medium text-white/90' : (day.type === 'outro' ? 'text-base md:text-xl text-[#00132C]/70 md:text-white/70' : 'text-base md:text-2xl text-[#00132C]/70 md:text-white/70')} font-light leading-relaxed max-w-4xl whitespace-pre-line`}>
+                      <p className={`${day.isFinal ? 'text-4xl md:text-6xl leading-tight! font-serif italic font-medium text-white/90' : (day.type === 'outro' ? 'text-base md:text-xl text-[#00132C]/70 md:text-white/70' : 'text-base md:text-2xl text-[#00132C]/70 md:text-white/70')} font-light leading-relaxed max-w-4xl whitespace-pre-line`}>
                         {day.desc}
                       </p>
                       {day.isFinal && (
