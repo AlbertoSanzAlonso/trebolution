@@ -64,8 +64,8 @@ const Itinerary = () => {
   };
 
   return (
-    <section 
-      id="itinerary" 
+    <section
+      id="itinerary"
       className="bg-brand-primary min-h-screen relative overflow-hidden"
       onClick={() => setActiveHotelId(null)}
     >
@@ -101,11 +101,10 @@ const Itinerary = () => {
               e.stopPropagation();
               goToSlide(idx);
             }}
-            className={`text-[9px] md:text-[11px] font-bold tracking-[0.3em] transition-all duration-500 shrink-0 cursor-pointer ${
-              currentSlide === idx 
-                ? 'text-white opacity-100 scale-125' 
+            className={`text-[9px] md:text-[11px] font-bold tracking-[0.3em] transition-all duration-500 shrink-0 cursor-pointer ${currentSlide === idx
+                ? 'text-white opacity-100 scale-125'
                 : 'text-white/20 hover:text-white/50'
-            }`}
+              }`}
           >
             {String(idx + 1).padStart(2, '0')}
           </button>
@@ -146,44 +145,44 @@ const Itinerary = () => {
             {/* Petal Watermark Texture with Masked Day Number */}
             {!day.isFinal && (
               <div className="absolute inset-0 z-1 pointer-events-none overflow-hidden" style={{ mixBlendMode: 'screen' }}>
-              <div
-                className="absolute bottom-[12%] md:bottom-[2%] left-[-50%] md:left-[-20%] w-[150px] h-[150px]"
-                style={{
-                  transform: `translate(-10%, 10%) rotate(40deg) scale(${petalScale}) scaleX(-1)`,
-                  transformOrigin: 'center'
-                }}
-              >
                 <div
-                  className="w-full h-full relative"
+                  className="absolute bottom-[12%] md:bottom-[2%] left-[-50%] md:left-[-20%] w-[150px] h-[150px]"
                   style={{
-                    clipPath: 'path("M 50,100 C 50,100 0,60 0,35 C 0,15 15,0 35,0 C 45,0 50,10 50,10 C 50,10 55,0 65,0 C 85,0 100,15 100,35 C 100,60 50,100 50,100 Z")',
-                    background: 'rgba(255, 255, 255, 0.85)',
+                    transform: `translate(-10%, 10%) rotate(40deg) scale(${petalScale}) scaleX(-1)`,
+                    transformOrigin: 'center'
                   }}
-                />
-              </div>
+                >
+                  <div
+                    className="w-full h-full relative"
+                    style={{
+                      clipPath: 'path("M 50,100 C 50,100 0,60 0,35 C 0,15 15,0 35,0 C 45,0 50,10 50,10 C 50,10 55,0 65,0 C 85,0 100,15 100,35 C 100,60 50,100 50,100 Z")',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                    }}
+                  />
+                </div>
 
-              {/* Masked Text (Black text in screen mode becomes transparent) */}
-              <div className="absolute bottom-10 right-8 md:bottom-16 md:left-24 z-20">
-                <div className="flex flex-col gap-1 items-end md:items-start text-right md:text-left">
-                  {day.type === 'day' && (
-                    <span className="hidden md:block text-black opacity-40 text-[9px] font-bold tracking-[0.4em] uppercase">Día del viaje</span>
-                  )}
-                  {day.inclusions ? (
-                    <div className="flex flex-col gap-0 md:gap-2 opacity-20 md:opacity-40 select-none">
-                      <span className="text-black text-[10px] md:text-xs font-bold tracking-[0.5em] uppercase mb-1">LO QUE</span>
-                      <h3 className="text-5xl md:text-[7rem] font-serif leading-none text-black whitespace-pre-line">
-                        INCLUYE
+                {/* Masked Text (Black text in screen mode becomes transparent) */}
+                <div className="absolute bottom-10 right-8 md:bottom-16 md:left-24 z-20">
+                  <div className="flex flex-col gap-1 items-end md:items-start text-right md:text-left">
+                    {day.type === 'day' && (
+                      <span className="hidden md:block text-black opacity-40 text-[9px] font-bold tracking-[0.4em] uppercase">Día del viaje</span>
+                    )}
+                    {day.inclusions ? (
+                      <div className="flex flex-col gap-0 md:gap-2 opacity-20 md:opacity-40 select-none">
+                        <span className="text-black text-[10px] md:text-xs font-bold tracking-[0.5em] uppercase mb-1">LO QUE</span>
+                        <h3 className="text-5xl md:text-[7rem] font-serif leading-none text-black whitespace-pre-line">
+                          INCLUYE
+                        </h3>
+                      </div>
+                    ) : (
+                      <h3 className={`text-4xl ${day.type === 'day' ? 'md:text-[9rem]' : 'md:text-[5.5rem]'} font-serif leading-none text-[#00132C] md:text-black select-none whitespace-pre-line`}>
+                        {day.day}
                       </h3>
-                    </div>
-                  ) : (
-                    <h3 className={`text-4xl ${day.type === 'day' ? 'md:text-[9rem]' : 'md:text-[5.5rem]'} font-serif leading-none text-[#00132C] md:text-black select-none whitespace-pre-line`}>
-                      {day.day}
-                    </h3>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
             {/* Content Container */}
             <div className="relative z-10 w-full h-full flex flex-col md:flex-row">
@@ -191,31 +190,31 @@ const Itinerary = () => {
               {/* Left Column: Visual/Meta */}
               {!day.isFinal && (
                 <div className="w-full md:w-[45%] h-auto md:h-full p-8 md:p-20 flex flex-col justify-start">
-                <div className="flex flex-col gap-6">
-                  {day.date && !day.isFinal && (
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      className="flex items-center gap-4 text-white md:text-[#00132C]"
-                    >
-                      <Calendar size={18} className="text-[#A68C6B]" />
-                      <span className="text-xs font-bold tracking-[0.4em] uppercase">{day.date}</span>
-                    </motion.div>
-                  )}
-                  {day.location && !day.isFinal && (
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 }}
-                      className="flex items-center gap-4 text-white md:text-[#00132C]"
-                    >
-                      <MapPin size={18} className="text-[#A68C6B]" />
-                      <span className="text-xs font-bold tracking-[0.4em] uppercase">{day.location}</span>
-                    </motion.div>
-                  )}
+                  <div className="flex flex-col gap-6">
+                    {day.date && !day.isFinal && (
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        className="flex items-center gap-4 text-white md:text-[#00132C]"
+                      >
+                        <Calendar size={18} className="text-[#A68C6B]" />
+                        <span className="text-xs font-bold tracking-[0.4em] uppercase">{day.date}</span>
+                      </motion.div>
+                    )}
+                    {day.location && !day.isFinal && (
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="flex items-center gap-4 text-white md:text-[#00132C]"
+                      >
+                        <MapPin size={18} className="text-[#A68C6B]" />
+                        <span className="text-xs font-bold tracking-[0.4em] uppercase">{day.location}</span>
+                      </motion.div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
               {/* Right Column: Detailed Info */}
               <div className={`w-full ${day.isFinal ? 'md:w-full md:pr-0' : 'md:w-[55%] md:pr-32'} h-full flex flex-col justify-center p-8 md:p-24 overflow-y-auto`}>
@@ -242,7 +241,7 @@ const Itinerary = () => {
                         {day.desc}
                       </p>
                       {day.isFinal && (
-                        <motion.img 
+                        <motion.img
                           initial={{ opacity: 0, scale: 0.8 }}
                           whileInView={{ opacity: 0.8, scale: 1 }}
                           transition={{ delay: 0.5, duration: 1 }}
@@ -297,7 +296,7 @@ const Itinerary = () => {
                               </div>
                             </div>
 
-                            <div 
+                            <div
                               onClick={(e) => toggleHotel(e, hId)}
                               className="flex items-center gap-4 text-[#00132C] md:text-white/80 hover:text-white transition-colors cursor-pointer group"
                             >
@@ -317,7 +316,7 @@ const Itinerary = () => {
                       {day.inclusions.map((item, idx) => {
                         const Icon = IconMap[item.icon];
                         return (
-                          <motion.div 
+                          <motion.div
                             key={idx}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -359,8 +358,8 @@ const Itinerary = () => {
                           <h4 className="text-[10px] md:text-xs font-bold tracking-[0.5em] text-white uppercase border-b border-[#A68C6B]/20 pb-2 w-fit">CONDICIONES DE RESERVA</h4>
                           <div className="flex flex-col gap-5">
                             {day.conditions.map((cond, idx) => (
-                              <motion.div 
-                                key={idx} 
+                              <motion.div
+                                key={idx}
                                 initial={{ opacity: 0, x: -10 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{ delay: idx * 0.1 }}
@@ -394,7 +393,7 @@ const Itinerary = () => {
                         </div>
 
                         {/* Hotel Main Block */}
-                        <div 
+                        <div
                           onClick={(e) => toggleHotel(e, hId)}
                           className="p-6 md:p-8 bg-white/10 md:bg-white/5 rounded-3xl border border-[#00132C]/10 md:border-white/10 flex items-center gap-6 md:gap-8 hover:bg-white/15 transition-all duration-500 cursor-pointer relative overflow-hidden"
                         >
@@ -408,7 +407,7 @@ const Itinerary = () => {
                             </div>
                             <span className="text-base md:text-xl font-medium text-[#00132C] md:text-white">{day.hotel}</span>
                           </div>
-                          
+
                           {/* Subtle Glow on Hover */}
                           <div className="absolute -inset-full bg-linear-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] group-hover:left-full transition-all duration-1000" />
                         </div>
