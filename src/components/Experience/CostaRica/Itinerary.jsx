@@ -163,9 +163,18 @@ const Itinerary = () => {
                   {day.type === 'day' && (
                     <span className="hidden md:block text-black opacity-40 text-[9px] font-bold tracking-[0.4em] uppercase">Día del viaje</span>
                   )}
-                  <h3 className={`text-4xl ${day.type === 'day' ? 'md:text-[9rem]' : 'md:text-[5.5rem]'} font-serif leading-none text-[#00132C] md:text-black select-none whitespace-pre-line`}>
-                    {day.day}
-                  </h3>
+                  {day.inclusions ? (
+                    <div className="flex flex-col gap-0 md:gap-2 opacity-20 md:opacity-40 select-none">
+                      <span className="text-black text-[10px] md:text-xs font-bold tracking-[0.5em] uppercase mb-1">LO QUE</span>
+                      <h3 className="text-5xl md:text-[7rem] font-serif leading-none text-black whitespace-pre-line">
+                        INCLUYE
+                      </h3>
+                    </div>
+                  ) : (
+                    <h3 className={`text-4xl ${day.type === 'day' ? 'md:text-[9rem]' : 'md:text-[5.5rem]'} font-serif leading-none text-[#00132C] md:text-black select-none whitespace-pre-line`}>
+                      {day.day}
+                    </h3>
+                  )}
                 </div>
               </div>
             </div>
@@ -207,15 +216,17 @@ const Itinerary = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   className="flex flex-col gap-1 md:gap-10 max-w-xl md:ml-auto"
                 >
-                  <div className="flex flex-col gap-4">
-                    <span className="text-[#A68C6B] text-[10px] font-bold tracking-[0.5em] uppercase">
-                      {day.type === 'intro' ? 'INFORMACIÓN PREVIA' : day.type === 'outro' ? 'DETALLES FINALES' : 'EXPERIENCIA EXCLUSIVA'}
-                    </span>
-                    <h2 className="text-3xl md:text-6xl font-serif text-[#00132C] md:text-white leading-tight max-w-[66%] md:max-w-none">
-                      {day.title}
-                    </h2>
-                    <div className="w-24 h-0.5 bg-[#A68C6B]/40" />
-                  </div>
+                  {!day.inclusions && (
+                    <div className="flex flex-col gap-4">
+                      <span className="text-[#A68C6B] text-[10px] font-bold tracking-[0.5em] uppercase">
+                        {day.title === 'TU EXPERIENCIA' ? 'TU EXPERIENCIA' : (day.type === 'intro' ? 'INFORMACIÓN PREVIA' : day.type === 'outro' ? 'DETALLES FINALES' : 'EXPERIENCIA EXCLUSIVA')}
+                      </span>
+                      <h2 className="text-3xl md:text-6xl font-serif text-[#00132C] md:text-white leading-tight max-w-[66%] md:max-w-none">
+                        {day.title}
+                      </h2>
+                      <div className="w-24 h-0.5 bg-[#A68C6B]/40" />
+                    </div>
+                  )}
 
                   {day.desc && (
                     <p className={`text-base ${day.type === 'outro' ? 'md:text-xl' : 'md:text-2xl'} text-[#00132C]/70 md:text-white/70 font-light leading-relaxed max-w-2xl whitespace-pre-line`}>
@@ -276,6 +287,71 @@ const Itinerary = () => {
                           </div>
                         );
                       })}
+                    </div>
+                  )}
+
+                  {/* Inclusions Grid (for Inclusions slide) */}
+                  {day.inclusions && (
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 md:gap-y-12 gap-x-4 md:gap-x-12 mt-8 md:mt-12">
+                      {day.inclusions.map((item, idx) => {
+                        const Icon = IconMap[item.icon];
+                        return (
+                          <motion.div 
+                            key={idx}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: idx * 0.05 }}
+                            className="flex flex-col items-center text-center gap-3 md:gap-4 group"
+                          >
+                            <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-[#A68C6B] flex items-center justify-center text-white transition-all duration-500 shadow-xl shadow-[#A68C6B]/20">
+                              {Icon && <Icon size={24} className="md:w-8 md:h-8" />}
+                            </div>
+                            <div className="flex flex-col gap-1 items-center">
+                              <span className="text-[9px] md:text-[11px] font-medium text-[#00132C]/80 md:text-white/80 leading-snug uppercase tracking-[0.15em] max-w-[140px] md:max-w-[180px]">
+                                {item.label}
+                              </span>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* Price & Conditions (for Investment slide) */}
+                  {day.price && (
+                    <div className="flex flex-col gap-8 md:gap-12 mt-4 md:mt-0">
+                      <div className="flex flex-col gap-4">
+                        <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6">
+                          <span className="text-6xl md:text-[7rem] font-serif text-[#00132C] md:text-white leading-none">{day.price}</span>
+                          <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-[#00132C]/50 md:text-white/50 uppercase">por persona en ocupación doble</span>
+                        </div>
+                        {day.supplement && (
+                          <div className="flex items-center gap-3">
+                            <div className="h-px w-8 bg-[#A68C6B]/40" />
+                            <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] text-[#A68C6B] uppercase">SUPLEMENTO INDIVIDUAL: {day.supplement}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {day.conditions && (
+                        <div className="flex flex-col gap-6 md:gap-8">
+                          <h4 className="text-[10px] md:text-xs font-bold tracking-[0.5em] text-[#00132C] md:text-white uppercase border-b border-[#A68C6B]/20 pb-2 w-fit">CONDICIONES DE RESERVA</h4>
+                          <div className="flex flex-col gap-5">
+                            {day.conditions.map((cond, idx) => (
+                              <motion.div 
+                                key={idx} 
+                                initial={{ opacity: 0, x: -10 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: idx * 0.1 }}
+                                className="flex gap-4 items-start"
+                              >
+                                <div className="w-1 md:w-1.5 h-1 md:h-1.5 rounded-full bg-[#A68C6B] mt-1.5 md:mt-2 shrink-0" />
+                                <p className="text-xs md:text-sm text-[#00132C]/70 md:text-white/70 font-light leading-relaxed max-w-lg">{cond}</p>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
 

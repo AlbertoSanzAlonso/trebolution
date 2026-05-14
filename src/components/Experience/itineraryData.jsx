@@ -15,10 +15,10 @@ const itineraryData = [
         indexSections: [
             { label: "03 El Recorrido", slide: 2 },
             { label: "04 Programa día a día", slide: 3 },
-            { label: "12 Hoteles seleccionados", slide: 11 },
-            { label: "13 ¿Qué incluye esta experiencia?", slide: 12 },
-            { label: "14 Inversión", slide: 13 },
-            { label: "15 Condiciones de reserva", slide: 14 }
+            { label: "13 Hoteles seleccionados", slide: 11 },
+            { label: "17 Lo que incluye", slide: 12 },
+            { label: "18 Inversión", slide: 13 },
+            { label: "19 Condiciones de reserva", slide: 14 }
         ],
         img: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&q=80&w=1200"
     },
@@ -128,7 +128,7 @@ const itineraryData = [
     },
     {
         type: "outro",
-        day: "ALOJAMIENTOS\nÚNICOS EN\nENTORNOS\nPRIVILEGIADOS",
+        day: "13",
         date: "Privilegiados",
         title: "Selección Exclusiva",
         hotels: [
@@ -141,9 +141,9 @@ const itineraryData = [
     },
     {
         type: "outro",
-        day: "13",
+        day: "",
         date: "Inclusiones",
-        title: "¿QUÉ INCLUYE ESTA EXPERIENCIA?",
+        title: "LO QUE INCLUYE",
         inclusions: [
             { label: "Vuelos ida y vuelta Madrid - San José", icon: "Plane" },
             { label: "7 Noches en hoteles seleccionados", icon: "Hotel" },
@@ -162,10 +162,17 @@ const itineraryData = [
     },
     {
         type: "outro",
-        day: "18",
-        date: "Tarifas",
-        title: "Tu Experiencia",
-        desc: "3.750€ por persona en ocupación doble. Incluye todas las experiencias descritas y el acompañamiento personalizado de Trebolution.",
+        day: "TU\nEXPERIENCIA",
+        date: "Inversión",
+        title: "INVERSIÓN EN ESTA EXPERIENCIA",
+        price: "3.750€",
+        supplement: "780€",
+        conditions: [
+            "Reserva del 50% para confirmar plaza.",
+            "Pago final antes del 30 de junio de 2026.",
+            "Grupo mínimo 15 personas. Máximo 25 personas.",
+            "El precio de los vuelos puede sufrir variación según fecha de emisión."
+        ],
         img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1200"
     },
     {
