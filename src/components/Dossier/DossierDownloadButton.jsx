@@ -11,8 +11,8 @@ const DossierDownloadButton = ({ data, onSuccess }) => {
     setError(null);
 
     try {
-      // Reemplaza este ID con el que obtengas en Formspree.io
-      const FORMSPREE_ID = 'xpwqnzre'; 
+      // ID real de Formspree configurado para Trebolution
+      const FORMSPREE_ID = 'mgodbbwb'; 
       
       const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: 'POST',
