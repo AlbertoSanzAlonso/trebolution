@@ -6,14 +6,17 @@ import { itineraryData } from '../itineraryData';
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const currentIndex = selectedImage ? itineraryData.findIndex(item => item.img === selectedImage.img) : -1;
+  // Filter itineraryData to show only 'day' items in the gallery
+  const galleryItems = itineraryData.filter(item => item.type === 'day');
+
+  const currentIndex = selectedImage ? galleryItems.findIndex(item => (item.galleryImg || item.img) === (selectedImage.galleryImg || selectedImage.img)) : -1;
 
   const handlePrev = () => {
-    if (currentIndex > 0) setSelectedImage(itineraryData[currentIndex - 1]);
+    if (currentIndex > 0) setSelectedImage(galleryItems[currentIndex - 1]);
   };
 
   const handleNext = () => {
-    if (currentIndex < itineraryData.length - 1) setSelectedImage(itineraryData[currentIndex + 1]);
+    if (currentIndex < galleryItems.length - 1) setSelectedImage(galleryItems[currentIndex + 1]);
   };
 
   return (
@@ -35,10 +38,11 @@ const Gallery = () => {
 
         {/* Desktop Grid / Mobile Scroll */}
         <div className="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pb-12 md:pb-0 -mx-6 px-12 md:mx-0 md:px-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 md:gap-x-10 gap-y-20 custom-scrollbar-hide">
-          {itineraryData.map((item, i) => (
+          {galleryItems.map((item, i) => (
             <div key={i} className="shrink-0 w-[70vw] sm:w-[400px] md:w-auto snap-center mr-4 md:mr-0">
               <GalleryCard
                 {...item}
+                img={item.galleryImg || item.img}
                 onClick={() => setSelectedImage(item)}
               />
             </div>
@@ -62,7 +66,7 @@ const Gallery = () => {
             {/* Full Background Image */}
             <div className="absolute inset-0 z-0">
               <img
-                src={selectedImage.img}
+                src={selectedImage.galleryImg || selectedImage.img}
                 alt={selectedImage.title}
                 className="w-full h-full object-cover"
               />
