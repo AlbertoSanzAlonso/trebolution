@@ -187,9 +187,10 @@ const Itinerary = () => {
             <div className="relative z-10 w-full h-full flex flex-col md:flex-row">
 
               {/* Left Column: Visual/Meta */}
-              <div className="w-full md:w-[45%] h-auto md:h-full p-8 md:p-20 flex flex-col justify-start">
+              {!day.isFinal && (
+                <div className="w-full md:w-[45%] h-auto md:h-full p-8 md:p-20 flex flex-col justify-start">
                 <div className="flex flex-col gap-6">
-                  {day.date && (
+                  {day.date && !day.isFinal && (
                     <motion.div
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -199,7 +200,7 @@ const Itinerary = () => {
                       <span className="text-xs font-bold tracking-[0.4em] uppercase">{day.date}</span>
                     </motion.div>
                   )}
-                  {day.location && (
+                  {day.location && !day.isFinal && (
                     <motion.div
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -212,9 +213,10 @@ const Itinerary = () => {
                   )}
                 </div>
               </div>
+            )}
 
-              {/* Right Column: Detailed Info - Pushed to the right */}
-              <div className="w-full md:w-[55%] h-full flex flex-col justify-center p-8 md:p-24 md:pr-32 overflow-y-auto">
+              {/* Right Column: Detailed Info */}
+              <div className={`w-full ${day.isFinal ? 'md:w-full md:pr-0' : 'md:w-[55%] md:pr-32'} h-full flex flex-col justify-center p-8 md:p-24 overflow-y-auto`}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -245,6 +247,7 @@ const Itinerary = () => {
                           src="/Trebol_2.svg"
                           alt="Trebolution"
                           className="w-20 md:w-32 h-20 md:h-32 object-contain"
+                          style={{ filter: 'invert(65%) sepia(12%) saturate(845%) hue-rotate(354deg) brightness(92%) contrast(88%)' }}
                         />
                       )}
                     </div>
