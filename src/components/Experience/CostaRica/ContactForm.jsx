@@ -90,19 +90,19 @@ const ContactForm = () => {
                 className="grid lg:grid-cols-2 gap-16 md:gap-32 items-center w-full"
               >
                 <div>
-                  <h2 className="text-blue-5xl md:text-[4rem] font-serif text-white leading-[0.95] tracking-tighter text-left">
+                  <h2 className="text-[2.5rem] md:text-[4rem] font-serif text-white leading-[0.95] tracking-tighter text-left">
                     Hay viajes que <br />
                     simplemente se recuerdan.<br />
                     <span className="italic text-white/50">Y otros que cambian la forma <br />de viajar para siempre.</span>
                   </h2>
                 </div>
                 <div className="flex flex-col gap-8 items-start">
-                  <p className="text-xs font-sans font-light text-white/40 tracking-widest leading-relaxed uppercase max-w-sm">
+                  <p className="text-sm md:text-xs font-sans font-light text-white/40 tracking-widest leading-relaxed uppercase max-w-sm">
                     Solicita el dossier privado con el programa completo y descubre Costa Rica desde la mirada Trebolution.
                   </p>
                   <button
                     onClick={() => setShowForm(true)}
-                    className="bg-white text-[#00132C] px-12 py-6 text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-[#A68C6B] hover:text-white transition-all duration-500 shadow-2xl rounded-full cursor-pointer"
+                    className="bg-white text-[#00132C] px-12 py-6 text-[13px] md:text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-[#A68C6B] hover:text-white transition-all duration-500 shadow-2xl rounded-full cursor-pointer"
                   >
                     Solicitar acceso a la experiencia
                   </button>
