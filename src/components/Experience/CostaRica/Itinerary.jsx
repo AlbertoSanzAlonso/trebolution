@@ -247,7 +247,6 @@ const Itinerary = () => {
                           src="/Trebol_2.svg"
                           alt="Trebolution"
                           className="w-20 md:w-32 h-20 md:h-32 object-contain"
-                          style={{ filter: 'invert(65%) sepia(12%) saturate(845%) hue-rotate(354deg) brightness(92%) contrast(88%)' }}
                         />
                       )}
                     </div>
