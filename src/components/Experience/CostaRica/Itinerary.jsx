@@ -238,7 +238,7 @@ const Itinerary = () => {
 
                   {day.desc && (
                     <div className="flex flex-col items-center gap-12">
-                      <p className={`text-base ${day.isFinal ? 'text-2xl md:text-5xl !leading-tight font-serif italic' : (day.type === 'outro' ? 'md:text-xl' : 'md:text-2xl')} text-[#00132C]/70 md:text-white/70 font-light leading-relaxed max-w-4xl whitespace-pre-line`}>
+                      <p className={`text-base ${day.isFinal ? 'text-2xl md:text-5xl !leading-tight font-serif italic text-white/90' : (day.type === 'outro' ? 'md:text-xl text-[#00132C]/70 md:text-white/70' : 'md:text-2xl text-[#00132C]/70 md:text-white/70')} font-light leading-relaxed max-w-4xl whitespace-pre-line`}>
                         {day.desc}
                       </p>
                       {day.isFinal && (
@@ -249,6 +249,7 @@ const Itinerary = () => {
                           src="/Trebol_2.svg"
                           alt="Trebolution"
                           className="w-20 md:w-32 h-20 md:h-32 object-contain"
+                          style={{ filter: 'brightness(0) invert(1)' }}
                         />
                       )}
                     </div>
@@ -342,8 +343,8 @@ const Itinerary = () => {
                     <div className="flex flex-col gap-8 md:gap-12 mt-4 md:mt-0">
                       <div className="flex flex-col gap-4">
                         <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6">
-                          <span className="text-6xl md:text-[7rem] font-serif text-[#00132C] md:text-white leading-none">{day.price}</span>
-                          <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-[#00132C]/50 md:text-white/50 uppercase">por persona en ocupación doble</span>
+                          <span className="text-6xl md:text-[7rem] font-serif text-white leading-none">{day.price}</span>
+                          <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-white/50 uppercase">por persona en ocupación doble</span>
                         </div>
                         {day.supplement && (
                           <div className="flex items-center gap-3">
@@ -355,7 +356,7 @@ const Itinerary = () => {
 
                       {day.conditions && (
                         <div className="flex flex-col gap-6 md:gap-8">
-                          <h4 className="text-[10px] md:text-xs font-bold tracking-[0.5em] text-[#00132C] md:text-white uppercase border-b border-[#A68C6B]/20 pb-2 w-fit">CONDICIONES DE RESERVA</h4>
+                          <h4 className="text-[10px] md:text-xs font-bold tracking-[0.5em] text-white uppercase border-b border-[#A68C6B]/20 pb-2 w-fit">CONDICIONES DE RESERVA</h4>
                           <div className="flex flex-col gap-5">
                             {day.conditions.map((cond, idx) => (
                               <motion.div 
@@ -366,7 +367,7 @@ const Itinerary = () => {
                                 className="flex gap-4 items-start"
                               >
                                 <div className="w-1 md:w-1.5 h-1 md:h-1.5 rounded-full bg-[#A68C6B] mt-1.5 md:mt-2 shrink-0" />
-                                <p className="text-xs md:text-sm text-[#00132C]/70 md:text-white/70 font-light leading-relaxed max-w-lg">{cond}</p>
+                                <p className="text-xs md:text-sm text-white/70 font-light leading-relaxed max-w-lg">{cond}</p>
                               </motion.div>
                             ))}
                           </div>
