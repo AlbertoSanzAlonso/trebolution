@@ -78,16 +78,18 @@ const Itinerary = () => {
       <div className="hidden md:flex absolute inset-y-0 left-0 right-0 items-center justify-between px-12 z-50 pointer-events-none">
         <button
           onClick={() => scroll('left')}
-          className="pointer-events-auto text-[#00132C] hover:opacity-50 transition-all cursor-pointer p-4"
+          className={`pointer-events-auto hover:opacity-50 transition-all cursor-pointer p-4 ${itineraryData[currentSlide]?.isFinal ? 'text-white' : 'text-[#00132C]'}`}
         >
           <ChevronLeft size={48} strokeWidth={1} />
         </button>
-        <button
-          onClick={() => scroll('right')}
-          className="pointer-events-auto text-white hover:opacity-50 transition-all cursor-pointer p-4"
-        >
-          <ChevronRight size={48} strokeWidth={1} />
-        </button>
+        {!itineraryData[currentSlide]?.isFinal && (
+          <button
+            onClick={() => scroll('right')}
+            className="pointer-events-auto text-white hover:opacity-50 transition-all cursor-pointer p-4"
+          >
+            <ChevronRight size={48} strokeWidth={1} />
+          </button>
+        )}
       </div>
 
       {/* Subtle Page Navigator (Numbers) */}
