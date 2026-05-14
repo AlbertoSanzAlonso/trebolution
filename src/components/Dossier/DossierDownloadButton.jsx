@@ -22,8 +22,8 @@ const DossierDownloadButton = ({ data, onSuccess }) => {
         },
         body: JSON.stringify({
           ...data,
-          _subject: `Nueva solicitud de dossier: ${data?.name || 'Sin nombre'}`,
-          message: `Interés en Costa Rica.\nPresupuesto: ${data?.budget}\nViajeros: ${data?.travelers}\nTipo: ${data?.experienceType}`
+          _subject: `Nueva solicitud de dossier Costa Rica: ${data?.name || 'Sin nombre'}`,
+          message: `Interés en Costa Rica.\n\nNombre: ${data?.name}\nEmail: ${data?.email}\nTeléfono: ${data?.phone}\nPresupuesto aceptado: ${data?.budget}`
         })
       });
 
