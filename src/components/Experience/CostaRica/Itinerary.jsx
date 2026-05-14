@@ -102,8 +102,8 @@ const Itinerary = () => {
               goToSlide(idx);
             }}
             className={`text-[9px] md:text-[11px] font-bold tracking-[0.3em] transition-all duration-500 shrink-0 cursor-pointer ${currentSlide === idx
-                ? 'text-white opacity-100 scale-125'
-                : 'text-white/20 hover:text-white/50'
+              ? 'text-white opacity-100 scale-125'
+              : 'text-white/20 hover:text-white/50'
               }`}
           >
             {String(idx + 1).padStart(2, '0')}
@@ -237,7 +237,7 @@ const Itinerary = () => {
 
                   {day.desc && (
                     <div className="flex flex-col items-center gap-12">
-                      <p className={`text-base ${day.isFinal ? 'text-2xl md:text-5xl !leading-tight font-serif italic text-white/90' : (day.type === 'outro' ? 'md:text-xl text-[#00132C]/70 md:text-white/70' : 'md:text-2xl text-[#00132C]/70 md:text-white/70')} font-light leading-relaxed max-w-4xl whitespace-pre-line`}>
+                      <p className={`text-base ${day.isFinal ? 'text-5xl md:text-5xl !leading-tight font-serif italic text-white/90' : (day.type === 'outro' ? 'md:text-xl text-[#00132C]/70 md:text-white/70' : 'md:text-2xl text-[#00132C]/70 md:text-white/70')} font-light leading-relaxed max-w-4xl whitespace-pre-line`}>
                         {day.desc}
                       </p>
                       {day.isFinal && (
